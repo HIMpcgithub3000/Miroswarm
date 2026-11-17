@@ -1,0 +1,29 @@
+{
+  "simulation_id": "sim_healthcare_pricing",
+  "project_id": "proj_healthcare_pricing",
+  "graph_id": "graph_healthcare_pricing",
+  "enable_twitter": true,
+  "enable_reddit": true,
+  "status": "completed",
+  "entities_count": 9,
+  "profiles_count": 8,
+  "entity_types": [
+    "CorporateHospital",
+    "HospitalCFO",
+    "MedicalSpecialist",
+    "InsuranceTPA",
+    "ActivistPatient",
+    "RegulatoryAuthority",
+    "PricingRegulation",
+    "ConsumablesSupply"
+  ],
+  "profiles_generated": true,
+  "config_generated": true,
+  "config_reasoning": "Configured 120-hour (5-day) multi-agent turn execution modeling 4 core healthcare archetypes.",
+  "current_round": 120,
+  "twitter_status": "completed",
+  "reddit_status": "completed",
+  "created_at": "2026-11-08T20:16:03.333445",
+  "updated_at": "2026-11-08T20:16:03.333445",
+  "error": null
+}

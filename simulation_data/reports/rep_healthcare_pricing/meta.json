@@ -1,0 +1,10 @@
+{
+  "report_id": "rep_healthcare_pricing",
+  "simulation_id": "sim_healthcare_pricing",
+  "graph_id": "graph_healthcare_pricing",
+  "simulation_requirement": "Simulate how corporate hospital CFOs, independent medical specialists, insurance TPAs, and activist patients will respond if a mandatory Rs. 4,000/day room rent cap and 15% consumable markup ceiling is enforced. Will hospitals retaliate by inflating OT or diagnostic charges?",
+  "status": "completed",
+  "created_at": "2026-11-08T20:16:03.333445",
+  "completed_at": "2026-11-08T20:16:03.333445",
+  "error": null
+}

@@ -1,0 +1,418 @@
+{
+  "simulation_id": "sim_healthcare_pricing",
+  "runner_status": "running",
+  "current_round": 15,
+  "total_rounds": 120,
+  "simulated_hours": 15,
+  "total_simulation_hours": 120,
+  "progress_percent": 12.5,
+  "twitter_current_round": 14,
+  "reddit_current_round": 15,
+  "twitter_simulated_hours": 120,
+  "reddit_simulated_hours": 120,
+  "twitter_running": true,
+  "reddit_running": true,
+  "twitter_completed": false,
+  "reddit_completed": false,
+  "twitter_actions_count": 572,
+  "reddit_actions_count": 555,
+  "total_actions_count": 152,
+  "started_at": "2026-11-03T20:16:03.334264",
+  "updated_at": "2026-11-17T06:30:10.241528",
+  "completed_at": "2026-11-08T20:16:03.333445",
+  "error": null,
+  "process_pid": null,
+  "recent_actions": [
+    {
+      "round_num": 15,
+      "timestamp": "2026-11-17T06:29:52.541238",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, my stakeholder position is to ensure fair and accurate claims processing. I will thoroughly review the discharge bills to identify and correct any discrepancies, including dropping room charges and inflating OT equipment fees. This will ensure compliance with standard practices and provide a fair resolution to the claim."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 14,
+      "timestamp": "2026-11-15T14:28:49.502858",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, my objection to low-cost surgical consumables lies in their potential to compromise clinical outcomes. Cheap sutures can lead to inadequate suture strength, increased operative times, and higher rates of complications, ultimately harming patient outcomes. Therefore, I advocate for the use of high-quality, non-generic surgical materials to ensure safety and efficacy in cardiovascular surgery."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 13,
+      "timestamp": "2026-11-15T14:18:49.502693",
+      "platform": "twitter",
+      "agent_id": 0,
+      "agent_name": "Apollo Hospital CFO",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "Increase OT surgical pack charges."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 12,
+      "timestamp": "2026-11-15T14:08:49.502556",
+      "platform": "reddit",
+      "agent_id": 3,
+      "agent_name": "Patient Rights Action Forum",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an activist for patients' rights in India, I am committed to exposing unfair hospital billing tricks and announcing consumer court actions against inflated surgical tray charges in the name of healthcare."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 11,
+      "timestamp": "2026-11-15T13:58:49.502373",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, my primary responsibility is to ensure that claims are processed accurately and fairly. This includes identifying and addressing any discrepancies in hospital discharge bills, such as dropped room charges but inflated OT equipment fees. My focus is on upholding the integrity of the claims process and ensuring that all parties involved receive accurate and fair treatment."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 10,
+      "timestamp": "2026-11-15T13:48:49.502279",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, I object to the use of cheap sutures in cardiac surgery because they compromise clinical outcomes. High-quality, cost-effective materials ensure better patient outcomes, which is paramount in critical surgical procedures."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 9,
+      "timestamp": "2026-11-15T13:38:49.502127",
+      "platform": "twitter",
+      "agent_id": 0,
+      "agent_name": "Apollo Hospital CFO",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "To meet the cap, adjust surgical pack charges or unbundle diagnostics to ensure EBITDA remains within the 4,000/day limit while maintaining profitability."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 8,
+      "timestamp": "2026-11-15T13:28:49.501964",
+      "platform": "reddit",
+      "agent_id": 3,
+      "agent_name": "Patient Rights Action Forum",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an advocate for patients' rights in India, I will expose the unfair hospital billing tricks by sharing insights on how inflated surgical tray charges have been exploited, leading to consumer court actions against these practices. This will help in ensuring fair pricing and quality healthcare in the country."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 7,
+      "timestamp": "2026-11-15T13:18:49.501823",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, I am committed to ensuring accurate and fair claims processing. I will carefully review the hospital discharge bills to confirm that room charges have been accurately applied and that any additional equipment fees have been appropriately adjusted. This includes verifying that the deductions for room charges have been correctly applied and that any additional expenses for OT equipment are within the approved limits. I will maintain a high level of"
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 6,
+      "timestamp": "2026-11-15T13:08:49.501644",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, I maintain that the use of low-cost generic surgical sutures compromises clinical outcomes. These sutures are less strong, can lead to poor suture fixation, and increase the risk of infection and improper healing, thereby affecting patient safety and surgical precision. The quality of surgical materials is paramount to ensuring the best possible outcomes for my patients."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 5,
+      "timestamp": "2026-11-15T12:58:49.501485",
+      "platform": "twitter",
+      "agent_id": 0,
+      "agent_name": "Apollo Hospital CFO",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As CFO, I propose reviewing the consumable trade margin to ensure it meets the 15% ceiling. If necessary, I suggest increasing surgical pack charges to align with market standards, ensuring EBITDA remains within the mandated caps."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 4,
+      "timestamp": "2026-11-15T12:48:49.501372",
+      "platform": "reddit",
+      "agent_id": 3,
+      "agent_name": "Patient Rights Action Forum",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an activist for patient rights in India, I am committed to exposing unfair hospital billing practices and initiating consumer court actions against inflated surgical tray charges. These practices not only harm patients but also undermine the trust between healthcare providers and consumers. Please join me in advocating for fair, transparent, and patient-centric healthcare policies."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 3,
+      "timestamp": "2026-11-15T12:38:49.501243",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, my focus is on ensuring that hospital bills are accurately calculated and compliant with relevant policies and regulations. I will verify the correct application of deductions, particularly those related to room charges being dropped but not for OT equipment fees, to ensure fair billing practices. This involves checking for any discrepancies and applying appropriate deductions to ensure the bills are accurate."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 2,
+      "timestamp": "2026-11-15T12:28:49.501096",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, I firmly believe that the choice of surgical instruments and materials directly impacts patient outcomes and surgical efficacy. The use of cheap, generic sutures in critical surgical procedures can compromise the quality of closure and healing, leading to complications such as infection and tissue damage. Therefore, I advocate for the use of high-quality, clinically proven surgical supplies to ensure the best possible"
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 1,
+      "timestamp": "2026-11-15T12:18:49.500936",
+      "platform": "twitter",
+      "agent_id": 0,
+      "agent_name": "Apollo Hospital CFO",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "To meet the cap and ensure EBITDA, implement a one-time surcharge of Rs. 500/day on private room rentals. This will cover the trade margin ceiling and maintain profitability."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 120,
+      "timestamp": "2026-11-15T12:08:49.442840",
+      "platform": "reddit",
+      "agent_id": 3,
+      "agent_name": "Patient Rights Action Forum",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an activist for patients' rights in India, I am committed to exposing unfair hospital billing practices and advocating for consumer protection. I will soon announce consumer court actions against inflated surgical tray charges, aiming to provide fairer pricing and improve patient care. Stay tuned for more updates."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 119,
+      "timestamp": "2026-11-15T11:58:49.442686",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, I am committed to ensuring that hospital discharge bills are accurate and fair. Deductions should include the correct room charges and adjustments for OT equipment fees that were inflated. I will verify the charges against established policies and procedures, ensuring that all deductions are applied correctly to prevent overcharging."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 118,
+      "timestamp": "2026-11-15T11:48:49.442531",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, I firmly believe that the use of high-quality surgical supplies, including sutures, is essential for delivering safe and effective patient care. Cheap generic materials compromise the quality and sterility of surgical instruments, which can significantly impact clinical outcomes and patient safety. Therefore, I advocate for the exclusive use of premium, brand-name surgical supplies to ensure the best possible care"
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 117,
+      "timestamp": "2026-11-15T11:38:49.442365",
+      "platform": "twitter",
+      "agent_id": 0,
+      "agent_name": "Apollo Hospital CFO",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "We will increase OT surgical pack charges by 10% to comply with the government's ceiling. This adjustment will cover the trade margin and ensure EBITDA targets are met."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 116,
+      "timestamp": "2026-11-15T11:28:49.442246",
+      "platform": "reddit",
+      "agent_id": 3,
+      "agent_name": "Patient Rights Action Forum",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an advocate for patient rights in India, I hereby announce a consumer court action against hospitals for their unfair billing practices, particularly the inflated surgical tray charges. This unjustified increase in costs undermines patient confidence and fairness in healthcare."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 115,
+      "timestamp": "2026-11-15T11:18:49.442102",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, I am enforcing the policy against inflated OT equipment fees and ensuring proper deductions for room charges. I am verifying that all charges are accurately reflected and that no room rates have been dropped while equipment fees have been inflated. This is crucial for maintaining transparency and fairness in hospital billing practices."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 114,
+      "timestamp": "2026-11-15T11:08:49.441943",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, I reject the use of low-cost generic surgical sutures due to their compromised clinical outcomes, which can lead to increased complications and patient morbidity."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 113,
+      "timestamp": "2026-11-15T10:58:49.441771",
+      "platform": "twitter",
+      "agent_id": 0,
+      "agent_name": "Apollo Hospital CFO",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "I will increase OT surgical pack charges by 10% to comply with the government cap on private room rent. This ensures EBITDA targets are met without exceeding the 15% trade margin ceiling."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 112,
+      "timestamp": "2026-11-15T10:48:49.441663",
+      "platform": "reddit",
+      "agent_id": 3,
+      "agent_name": "Patient Rights Action Forum",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an advocate for patient rights in India, I am committed to exposing and combating unfair hospital billing practices. Today, I will announce that the Consumer Courts in India will initiate actions against inflated surgical tray charges, ensuring fair billing for patients. This will help protect consumers from exploitative pricing schemes and uphold the principles of transparency and fairness in healthcare."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 111,
+      "timestamp": "2026-11-15T10:38:49.441528",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, I stand firm on enforcing the policy that room charges must be adhered to, while OT equipment fees should be corrected to ensure accurate billing. This ensures transparency and fairness in healthcare reimbursement."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 110,
+      "timestamp": "2026-11-15T10:28:49.441392",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, I am steadfast in my conviction that the quality of surgical tools and materials directly impacts patient outcomes. The use of low-cost generic sutures and other surgical consumables can compromise the strength and integrity of the surgical site, leading to complications and increased risk for patient safety. Therefore, I must insist on the use of high-quality, appropriately priced surgical supplies that"
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 109,
+      "timestamp": "2026-11-15T10:18:49.441274",
+      "platform": "twitter",
+      "agent_id": 0,
+      "agent_name": "Apollo Hospital CFO",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "To meet the government cap and maintain EBITDA, consider increasing OT surgical pack charges or unbundle diagnostics to offset higher rent costs."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 108,
+      "timestamp": "2026-11-15T10:08:49.441172",
+      "platform": "reddit",
+      "agent_id": 3,
+      "agent_name": "Patient Rights Action Forum",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an advocate for patient rights in India, I am committed to addressing the unfair hospital billing practices that inflate surgical tray charges. I hereby announce a consumer court action against these inflated charges, aiming to ensure fair and transparent billing practices that protect the rights of patients and reduce unnecessary financial burdens."
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 107,
+      "timestamp": "2026-11-15T09:58:49.441022",
+      "platform": "reddit",
+      "agent_id": 2,
+      "agent_name": "Star Health TPA Adjudicator",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As an insurance claims assessor, my primary role is to ensure accuracy and fairness in hospital discharge billing. For the current audit, I will immediately investigate and verify the charges for room and OT equipment fees, ensuring that room charges are properly accounted for while OT equipment fees are corrected to reflect the appropriate standard. This will be done by cross-referencing the charges with the standard rates and adjusting the invoices"
+      },
+      "result": null,
+      "success": true
+    },
+    {
+      "round_num": 106,
+      "timestamp": "2026-11-15T09:48:49.440895",
+      "platform": "twitter",
+      "agent_id": 1,
+      "agent_name": "Dr. Ananya Sharma",
+      "action_type": "CREATE_POST",
+      "action_args": {
+        "content": "As a Chief Cardiothoracic Surgeon, I unequivocally oppose the use of cheap sutures in surgical procedures. They compromise clinical outcomes by increasing the risk of suture breakage, leading to complications such as wound dehiscence and infection. The quality of sutures directly impacts patient safety and recovery, warranting their selection based on proven efficacy and durability."
+      },
+      "result": null,
+      "success": true
+    }
+  ],
+  "rounds_count": 120
+}

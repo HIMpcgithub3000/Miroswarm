@@ -1,0 +1,62 @@
+[
+  {
+    "agent_id": 0,
+    "name": "Apollo Hospital CFO",
+    "username": "HospitalCFO_IN",
+    "description": "Healthcare executive focused on institutional sustainability, margin retention, and capital deployment.",
+    "topics": [
+      "HealthcareFinance",
+      "HospitalEconomics",
+      "RegulatoryImpact",
+      "RoomRentCap"
+    ],
+    "platform": "twitter",
+    "stance": "Strongly opposing unviable price capping; executing financial substitution into OT and procedural lines.",
+    "activity_level": "High"
+  },
+  {
+    "agent_id": 1,
+    "name": "Dr. Ananya Sharma",
+    "username": "DrAnanyaSurgeon",
+    "description": "Senior Cardiothoracic Surgeon at leading quaternary care facility. Clinical quality purist.",
+    "topics": [
+      "SurgicalExcellence",
+      "ImplantSafety",
+      "MedicalEthics",
+      "Consumables"
+    ],
+    "platform": "twitter",
+    "stance": "Refusing cheap standardized surgical consumables; warning against clinical degradation.",
+    "activity_level": "Medium"
+  },
+  {
+    "agent_id": 2,
+    "name": "Star Health TPA Adjudicator",
+    "username": "TPA_ClaimsReview",
+    "description": "Head of Cashless Hospital Network Audits & Claims Settlement.",
+    "topics": [
+      "InsuranceFraud",
+      "ClaimDeductions",
+      "CashlessApproval",
+      "BillScrutiny"
+    ],
+    "platform": "twitter",
+    "stance": "Strictly auditing discharge summaries; disallowing unbundled consumables and inflated OT packs.",
+    "activity_level": "High"
+  },
+  {
+    "agent_id": 3,
+    "name": "Patient Rights Action Forum",
+    "username": "PatientAdvocateIN",
+    "description": "Grassroots healthcare transparency collective crowdsourcing hospital bills and disputing illegal surcharges.",
+    "topics": [
+      "MedicalBilling",
+      "PatientRights",
+      "HiddenCharges",
+      "ExposeOverbilling"
+    ],
+    "platform": "twitter",
+    "stance": "Filing consumer court grievances; mobilizing social media boycotts against overcharging hospitals.",
+    "activity_level": "High"
+  }
+]

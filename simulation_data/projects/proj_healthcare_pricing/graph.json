@@ -1,0 +1,132 @@
+{
+  "graph_id": "graph_healthcare_pricing",
+  "nodes": {
+    "n_apollo_cfo": {
+      "uuid": "n_apollo_cfo",
+      "name": "Apollo Hospitals CFO",
+      "labels": [
+        "HospitalCFO",
+        "Executive"
+      ],
+      "summary": "Corporate hospital executive responsible for quarterly operating margins and EBITDA targets."
+    },
+    "n_max_director": {
+      "uuid": "n_max_director",
+      "name": "Max Healthcare Operational Director",
+      "labels": [
+        "CorporateHospital",
+        "Executive"
+      ],
+      "summary": "Oversees tertiary care inpatient rate structures and surgical revenue allocation."
+    },
+    "n_dr_sharma": {
+      "uuid": "n_dr_sharma",
+      "name": "Dr. Ananya Sharma (Chief of Cardiac Surgery)",
+      "labels": [
+        "MedicalSpecialist",
+        "Surgeon"
+      ],
+      "summary": "Senior cardiothoracic surgeon advocating for surgical autonomy and premium consumables."
+    },
+    "n_star_tpa": {
+      "uuid": "n_star_tpa",
+      "name": "Star Health TPA Adjudication Head",
+      "labels": [
+        "InsuranceTPA",
+        "Regulator"
+      ],
+      "summary": "Audits inpatient cashless settlement claims against GIC non-payable schedules."
+    },
+    "n_patient_advocate": {
+      "uuid": "n_patient_advocate",
+      "name": "Patient Rights Action Forum",
+      "labels": [
+        "ActivistPatient",
+        "Community"
+      ],
+      "summary": "Patient advocacy coalition crowdsourcing hospital bills and tracking illicit markups."
+    },
+    "n_nha_regulator": {
+      "uuid": "n_nha_regulator",
+      "name": "National Health Authority (NHA)",
+      "labels": [
+        "RegulatoryAuthority",
+        "Government"
+      ],
+      "summary": "Enforces statutory ceiling orders and Clinical Establishments Act pricing compliance."
+    },
+    "n_room_cap": {
+      "uuid": "n_room_cap",
+      "name": "Rs. 4,000/day Room Rent Tariff Cap",
+      "labels": [
+        "PricingRegulation",
+        "Policy"
+      ],
+      "summary": "Statutory price ceiling on private room accommodation."
+    },
+    "n_consumable_cap": {
+      "uuid": "n_consumable_cap",
+      "name": "15% Consumable Markup Ceiling",
+      "labels": [
+        "PricingRegulation",
+        "Policy"
+      ],
+      "summary": "Ceiling restricting trade margins on single-use surgical consumables."
+    },
+    "n_ot_pack": {
+      "uuid": "n_ot_pack",
+      "name": "Operating Theater Surgical Equipment Pack",
+      "labels": [
+        "ConsumablesSupply",
+        "ProcedureCost"
+      ],
+      "summary": "Unbundled surgical instrument and sterilization line item."
+    }
+  },
+  "edges": {
+    "e_01": {
+      "uuid": "e_01",
+      "source_node_uuid": "n_apollo_cfo",
+      "target_node_uuid": "n_room_cap",
+      "relation_type": "RETALIATES_AGAINST",
+      "fact": "Apollo CFO models Rs. 280M inpatient shortfall from room cap and initiates margin substitution strategy."
+    },
+    "e_02": {
+      "uuid": "e_02",
+      "source_node_uuid": "n_apollo_cfo",
+      "target_node_uuid": "n_ot_pack",
+      "relation_type": "INFLATES",
+      "fact": "Increases OT tray charges from Rs. 18,000 to Rs. 34,500 to offset bed tariff restrictions."
+    },
+    "e_03": {
+      "uuid": "e_03",
+      "source_node_uuid": "n_dr_sharma",
+      "target_node_uuid": "n_consumable_cap",
+      "relation_type": "DISPUTES",
+      "fact": "Refuses standardized procurement sutures, claiming patient safety compromise."
+    },
+    "e_04": {
+      "uuid": "e_04",
+      "source_node_uuid": "n_star_tpa",
+      "target_node_uuid": "n_apollo_cfo",
+      "relation_type": "AUDITS",
+      "fact": "Rejects inflated surgical tray invoices, creating a 48-hour cashless approval bottleneck."
+    },
+    "e_05": {
+      "uuid": "e_05",
+      "source_node_uuid": "n_patient_advocate",
+      "target_node_uuid": "n_apollo_cfo",
+      "relation_type": "EXPOSES",
+      "fact": "Publishes itemized discharge bills on social media demonstrating 92% diagnostic markup."
+    },
+    "e_06": {
+      "uuid": "e_06",
+      "source_node_uuid": "n_nha_regulator",
+      "target_node_uuid": "n_room_cap",
+      "relation_type": "REGULATES",
+      "fact": "Issues clinical audit directives to state health departments to enforce tariff compliance."
+    }
+  },
+  "node_count": 9,
+  "edge_count": 6
+}

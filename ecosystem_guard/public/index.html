@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosystem Guard // Autonomous Healthcare Counter-Retaliation Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0d12;
+      --card-bg: #141721;
+      --card-border: #232838;
+      --accent: #ff4500;
+      --accent-glow: rgba(255, 69, 0, 0.2);
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --font-sans: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+    header {
+      background: rgba(20, 23, 33, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 16px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #fff;
+    }
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .link-btn {
+      background: #1f2433;
+      color: #d1d5db;
+      border: 1px solid var(--card-border);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+    .link-btn:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 24px;
+    }
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(255, 69, 0, 0.1) 0%, rgba(20, 23, 33, 0.6) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px 32px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .hero-info h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+    .hero-info p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+    .pill-badge {
+      display: inline-block;
+      background: rgba(255, 69, 0, 0.15);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+    .stat-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .stat-value.danger { color: var(--red); }
+    .stat-value.warning { color: var(--yellow); }
+    .stat-value.success { color: var(--green); }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-sm {
+      background: #1f2433;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+    .btn-sm:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      background: #0d1017;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.85rem;
+    }
+    .items-table th {
+      text-align: left;
+      padding: 8px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .items-table td {
+      padding: 8px;
+      border-bottom: 1px solid #1a1e2b;
+    }
+    .btn-audit {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-audit:hover {
+      background: #e03d00;
+      transform: translateY(-1px);
+    }
+    .result-box {
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid transparent;
+    }
+    .result-box.danger {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .result-box.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .risk-score-display {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .risk-score-num {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--card-border);
+      font-size: 0.88rem;
+    }
+    .breakdown-row.total {
+      font-weight: 700;
+      border-bottom: none;
+      padding-top: 12px;
+      font-size: 1rem;
+    }
+    .recommendations-list {
+      margin-top: 16px;
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .letter-preview {
+      background: #0d1017;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #d1d5db;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-logo">EG</div>
+      <div>
+        <div class="brand-title">ECOSYSTEM GUARD</div>
+        <div class="brand-subtitle">Autonomous Counter-Retaliation Engine</div>
+      </div>
+    </div>
+    <div class="header-links">
+      <a href="/mirofish/" class="link-btn">← Back to MiroFish Simulation</a>
+      <a href="/guard/api/health" target="_blank" class="link-btn">System Health API</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero-banner">
+      <div class="hero-info">
+        <span class="pill-badge">Built on Miro Swarm Findings (rep_healthcare_pricing)</span>
+        <h1>Counter-Retaliation Bill Auditor & Enforcement</h1>
+        <p>Miro Swarm discovered corporate hospitals compensate for the ₹4,000 room cap and 15% consumable ceiling by inflating OT pack fees by +42.6% and unbundling diagnostics. Ecosystem Guard intercepts and neutralizes this retaliation.</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">OT Margin Surge Detected</div>
+        <div class="stat-value danger">+42.6%</div>
+        <div class="stat-sub">Miro Swarm empirical finding</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Room Rent Ceiling</div>
+        <div class="stat-value warning">₹4,000 / day</div>
+        <div class="stat-sub">Statutory room cap</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Consumable Trade Margin</div>
+        <div class="stat-value warning">15% Max</div>
+        <div class="stat-sub">NPPA ceiling limit</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Swarm Defiance Probability</div>
+        <div class="stat-value danger">88.4%</div>
+        <div class="stat-sub">Without autonomous audit</div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <!-- Input Panel -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Hospital Bill Data Input</div>
+          <button type="button" class="btn-sm" id="loadSampleBtn">+ Load Retaliatory Hospital Bill</button>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Hospital Name</label>
+            <input type="text" id="hospitalName" class="form-input" value="Apollo Multi-Specialty Hospital">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location / City</label>
+            <input type="text" id="hospitalCity" class="form-input" value="Bangalore">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Room Type</label>
+            <input type="text" id="roomType" class="form-input" value="Private Single Delux">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Days of Stay</label>
+            <input type="number" id="stayDays" class="form-input" value="3">
+          </div>
+        </div>
+
+        <label class="form-label" style="margin-top: 12px;">Bill Line Items (Category & Cost)</label>
+        <table class="items-table" id="itemsTable">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Billed (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+
+        <button type="button" class="btn-audit" id="auditBtn">RUN COUNTER-RETALIATION AUDIT →</button>
+      </div>
+
+      <!-- Audit Results Panel -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Audit & Retaliation Analysis</div>
+          <span class="pill-badge" id="auditStatus">Awaiting Audit</span>
+        </div>
+
+        <div id="resultsPlaceholder" style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+          Click <strong>Load Retaliatory Hospital Bill</strong> then <strong>Run Counter-Retaliation Audit</strong> to evaluate against the Miro Swarm empirical baseline.
+        </div>
+
+        <div id="resultsContent" style="display: none;">
+          <div class="result-box danger" id="riskBox">
+            <div class="risk-score-display">
+              <div>
+                <div style="font-size: 0.8rem; text-transform: uppercase; font-family: var(--font-mono);">Retaliation Score</div>
+                <div style="font-size: 1.1rem; font-weight: 700;" id="riskLevel">Severe Retaliation</div>
+              </div>
+              <div class="risk-score-num" id="riskScore">78/100</div>
+            </div>
+            <div style="font-size: 0.82rem; color: #fca5a5;" id="otSurgeAlert">
+              Compensatory OT Surge Detected: +42.6% above reference clinical guidelines.
+            </div>
+          </div>
+
+          <div class="breakdown-row">
+            <span>Total Invoiced Hospital Bill:</span>
+            <span style="font-family: var(--font-mono); font-weight: 600;" id="totalBilled">₹1,85,000</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Fair Benchmark Compliance Baseline:</span>
+            <span style="font-family: var(--font-mono); font-weight: 600; color: var(--green);" id="fairTotal">₹1,42,000</span>
+          </div>
+          <div class="breakdown-row total">
+            <span style="color: var(--red);">Unlawful Retaliatory Excess Markup:</span>
+            <span style="font-family: var(--font-mono); color: var(--red);" id="excessMarkup">₹43,000</span>
+          </div>
+
+          <div style="margin-top: 20px;">
+            <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 8px;">AUDIT ACTION RECOMMENDATIONS:</div>
+            <ul class="recommendations-list" id="recommendationsList">
+            </ul>
+          </div>
+
+          <div style="margin-top: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent); font-weight: 600;">FORMAL LEGAL DISPUTE LETTER</span>
+              <button type="button" class="btn-sm" id="copyNoticeBtn">Copy Notice</button>
+            </div>
+            <div class="letter-preview" id="letterPreview"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sampleItems = [
+      { category: "room", name: "Room Rent (Private Deluxe)", billed_amount: 18000, units: 3 },
+      { category: "ot", name: "Operating Theater & Anesthesia Pack", billed_amount: 49910, units: 1 },
+      { category: "surgeon", name: "Chief Orthopedic Surgeon Fee", billed_amount: 45000, units: 1 },
+      { category: "consumables", name: "Surgical Consumables & PPE Pack", billed_amount: 22000, units: 1 },
+      { category: "consumables", name: "Biomedical Hygiene Sterilization Kit", billed_amount: 14000, units: 1 },
+      { category: "diagnostics", name: "Intraoperative Diagnostic Panel & Imaging", billed_amount: 21090, units: 1 },
+      { category: "pharmacy", name: "Post-Op Specialized Injectables", billed_amount: 15000, units: 1 }
+    ];
+
+    function renderTable(items) {
+      const tbody = document.getElementById('itemsBody');
+      tbody.innerHTML = '';
+      items.forEach((item, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span style="font-family: var(--font-mono); color: var(--accent); font-size: 0.75rem;">${item.category.toUpperCase()}</span></td>
+          <td>${item.name}</td>
+          <td style="font-family: var(--font-mono); font-weight: 600;">₹${item.billed_amount.toLocaleString()}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    renderTable(sampleItems);
+
+    document.getElementById('loadSampleBtn').addEventListener('click', () => {
+      renderTable(sampleItems);
+    });
+
+    document.getElementById('auditBtn').addEventListener('click', async () => {
+      const hospitalName = document.getElementById('hospitalName').value;
+      const hospitalCity = document.getElementById('hospitalCity').value;
+      const roomType = document.getElementById('roomType').value;
+      const stayDays = parseInt(document.getElementById('stayDays').value) || 3;
+
+      document.getElementById('auditStatus').innerText = 'Auditing...';
+
+      try {
+        const res = await fetch('/guard/api/audit-bill', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            hospital_name: hospitalName,
+            city: hospitalCity,
+            room_type: roomType,
+            stay_days: stayDays,
+            items: sampleItems
+          })
+        });
+
+        const data = await res.json();
+        
+        document.getElementById('resultsPlaceholder').style.display = 'none';
+        document.getElementById('resultsContent').style.display = 'block';
+        document.getElementById('auditStatus').innerText = 'Audit Complete';
+        document.getElementById('auditStatus').style.background = 'rgba(16, 185, 129, 0.15)';
+        document.getElementById('auditStatus').style.color = '#10b981';
+
+        document.getElementById('riskScore').innerText = `${data.retaliation_risk_score}/100`;
+        document.getElementById('riskLevel').innerText = data.retaliation_level;
+        document.getElementById('totalBilled').innerText = `₹${data.total_billed.toLocaleString()}`;
+        document.getElementById('fairTotal').innerText = `₹${data.fair_benchmark_total.toLocaleString()}`;
+        document.getElementById('excessMarkup').innerText = `₹${data.excess_markup_amount.toLocaleString()}`;
+
+        if (data.ot_surge_detected) {
+          document.getElementById('otSurgeAlert').innerText = `Compensatory OT Surge Detected: +${data.ot_surge_percent}% above clinical benchmark.`;
+          document.getElementById('otSurgeAlert').style.display = 'block';
+        } else {
+          document.getElementById('otSurgeAlert').style.display = 'none';
+        }
+
+        const recList = document.getElementById('recommendationsList');
+        recList.innerHTML = '';
+        data.actionable_recommendations.forEach(rec => {
+          const li = document.createElement('li');
+          li.innerText = rec;
+          recList.appendChild(li);
+        });
+
+        // Request Dispute Letter
+        const letterRes = await fetch('/guard/api/counter-playbook', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            patient_name: "Rahul Mehra",
+            hospital_name: hospitalName,
+            bill_number: "APL-BLR-2026-9812",
+            audit_summary: data
+          })
+        });
+
+        const letterData = await letterRes.json();
+        document.getElementById('letterPreview').innerText = letterData.dispute_letter_text;
+
+      } catch (err) {
+        alert("Audit Error: " + err.message);
+      }
+    });
+
+    document.getElementById('copyNoticeBtn').addEventListener('click', () => {
+      const text = document.getElementById('letterPreview').innerText;
+      navigator.clipboard.writeText(text);
+      alert("Dispute notice copied to clipboard!");
+    });
+  </script>
+</body>
+</html>

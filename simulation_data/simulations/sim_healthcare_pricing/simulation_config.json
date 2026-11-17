@@ -1,0 +1,31 @@
+{
+  "simulation_id": "sim_healthcare_pricing",
+  "simulation_requirement": "Simulate how corporate hospital CFOs, independent medical specialists, insurance TPAs, and activist patients will respond if a mandatory Rs. 4,000/day room rent cap and 15% consumable markup ceiling is enforced. Will hospitals retaliate by inflating OT or diagnostic charges?",
+  "generated_at": "2026-11-08T20:16:03.333445",
+  "llm_model": "qwen2.5:1.5b-instruct",
+  "time_config": {
+    "total_simulation_hours": 120,
+    "minutes_per_round": 60,
+    "total_rounds": 120
+  },
+  "event_config": {
+    "hot_topics": [
+      "#HealthcarePriceCap",
+      "#HospitalOverbilling",
+      "#CashlessDispute",
+      "#NPPAOrders"
+    ],
+    "initial_posts": [
+      {
+        "platform": "twitter",
+        "author": "HospitalCFO_IN",
+        "content": "Mandated Rs. 4,000/day bed caps fail to recognize tertiary infrastructure costs. To maintain clinical viability, theaters and precision procedural facilities will reflect true economic value."
+      },
+      {
+        "platform": "twitter",
+        "author": "PatientAdvocateIN",
+        "content": "Alert: We are already receiving bills where private hospitals reduced room charges by Rs. 2,000 but added a Rs. 16,500 'Sterile Surgical Tray Preparation' fee. Pure regulatory arbitrage!"
+      }
+    ]
+  }
+}
