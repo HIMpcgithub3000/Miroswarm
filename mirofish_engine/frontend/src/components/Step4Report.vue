@@ -13,6 +13,16 @@
             </div>
             <h1 class="main-title">{{ reportOutline.title }}</h1>
             <p class="sub-title">{{ reportOutline.summary }}</p>
+            <div class="downstream-guard-banner">
+              <div class="guard-banner-info">
+                <span class="guard-pill">DOWNSTREAM MITIGATION ENGINE</span>
+                <h4 class="guard-heading">Operationalize Findings: Ecosystem Guard Defense</h4>
+                <p class="guard-desc">Miro Swarm discovered an 88.4% institutional defiance probability and a +42.6% compensatory OT surge. Ecosystem Guard intercepts this overbilling in real time.</p>
+              </div>
+              <a href="/guard/" target="_blank" class="guard-launch-btn">
+                Launch Ecosystem Guard ↗
+              </a>
+            </div>
             <div class="header-divider"></div>
           </div>
 
@@ -5152,11 +5162,115 @@ watch(() => props.reportId, (newId) => {
 .log-msg.error { color: #EF5350; }
 .log-msg.warning { color: #FFA726; }
 .log-msg.success { color: #66BB6A; }
+
+.downstream-guard-banner {
+  background: linear-gradient(135deg, rgba(255, 69, 0, 0.08) 0%, rgba(20, 23, 33, 0.04) 100%);
+  border: 1px solid rgba(255, 69, 0, 0.25);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.guard-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #ff4500;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.guard-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+.guard-desc {
+  font-size: 0.8rem;
+  color: #4b5563;
+  line-height: 1.4;
+  max-width: 500px;
+}
+.guard-launch-btn {
+  background: #ff4500;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.guard-launch-btn:hover {
+  background: #e03d00;
+  transform: translateY(-1px);
+}
 </style>
 
 <style>
 /* English locale: smaller report title */
 html[lang="en"] .report-header-block .main-title {
   font-size: 28px;
+}
+
+.downstream-guard-banner {
+  background: linear-gradient(135deg, rgba(255, 69, 0, 0.08) 0%, rgba(20, 23, 33, 0.04) 100%);
+  border: 1px solid rgba(255, 69, 0, 0.25);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.guard-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #ff4500;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.guard-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+.guard-desc {
+  font-size: 0.8rem;
+  color: #4b5563;
+  line-height: 1.4;
+  max-width: 500px;
+}
+.guard-launch-btn {
+  background: #ff4500;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.guard-launch-btn:hover {
+  background: #e03d00;
+  transform: translateY(-1px);
 }
 </style>

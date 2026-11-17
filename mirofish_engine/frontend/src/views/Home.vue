@@ -3,8 +3,8 @@
     <!-- Top Navigation Bar -->
     <nav class="navbar">
       <div class="nav-left">
-        <div class="nav-brand">MIROFISH</div>
-        <span class="brand-tag">DECISION SIMULATION ENGINE</span>
+        <div class="nav-brand">MIRO SWARM</div>
+        <span class="brand-tag">ENTERPRISE DECISION TWIN</span>
       </div>
 
       <div class="nav-center">
@@ -16,34 +16,53 @@
       </div>
 
       <div class="nav-links">
-        <LanguageSwitcher />
-        <a href="https://github.com/666ghj/MiroFish" target="_blank" class="github-link">
+        <a href="/guard/" target="_blank" class="nav-btn-highlight">
+          <span class="btn-icon">🛡️</span>
+          <span>Ecosystem Guard ↗</span>
+        </a>
+        <a href="/swarm-docs" target="_blank" class="nav-btn-secondary">
+          <span>Swarm API ↗</span>
+        </a>
+        <a href="https://github.com/HIMpcgithub3000/Miroswarm" target="_blank" class="github-link">
           <span>GitHub</span>
           <span class="arrow">↗</span>
         </a>
       </div>
     </nav>
 
+    <!-- Downstream Retaliation Intelligence Banner -->
+    <div class="intelligence-banner">
+      <div class="banner-inner">
+        <div class="banner-badge">SIMULATION FINDING</div>
+        <div class="banner-text">
+          <strong>Empirical Discovery:</strong> Mandatory ₹4,000 room cap triggers an <strong>88.4% defiance probability</strong> with hospitals retaliating by inflating Operating Theater fees by <strong>+42.6%</strong>.
+        </div>
+        <a href="/guard/" target="_blank" class="banner-cta">
+          Inspect Ecosystem Guard Defense Engine →
+        </a>
+      </div>
+    </div>
+
     <div class="main-content">
       <!-- Upper Section: Hero Area -->
       <section class="hero-section">
         <div class="hero-left">
           <div class="tag-row">
-            <span class="orange-tag">Concise &amp; Universal Swarm Intelligence Engine</span>
-            <span class="version-text">/ v0.1-Preview</span>
+            <span class="orange-tag">Multi-Agent Enterprise Digital-Twin & Decision Intelligence</span>
+            <span class="version-text">/ Production v1.0</span>
           </div>
 
           <h1 class="main-title">
-            Upload Reports,<br>
-            <span class="gradient-text">Predict the Future</span>
+            Enterprise Digital Twin,<br>
+            <span class="gradient-text">Simulate Market Retaliation</span>
           </h1>
 
           <div class="hero-desc">
             <p>
-              From a single document or policy brief, <span class="highlight-bold">MiroFish</span> extracts reality seeds to auto-generate a parallel world of autonomous stakeholder agents. Inject variables to stress-test decisions before real-world rollout.
+              Construct an 8-relationship causal digital twin from regulatory directives, contracts, and tariff rules. Rehearse adversarial stakeholder reactions (Hospital CFOs, Specialists, TPAs, Consumers) in parallel worlds before real-world rollout.
             </p>
             <p class="slogan-text">
-              Let Agents rehearse the future, let decisions prevail<span class="blinking-cursor">_</span>
+              Rehearse the retaliation before the market retaliates<span class="blinking-cursor">_</span>
             </p>
           </div>
 
@@ -51,8 +70,20 @@
         </div>
 
         <div class="hero-right">
-          <div class="logo-container">
-            <img src="../assets/logo/MiroFish_logo_left.jpeg" alt="MiroFish Logo" class="hero-logo" />
+          <div class="twin-visual-box">
+            <div class="digital-twin-orb">
+              <div class="orb-ring ring-1"></div>
+              <div class="orb-ring ring-2"></div>
+              <div class="orb-ring ring-3"></div>
+              <div class="orb-core">
+                <span class="core-label">MIRO</span>
+                <span class="core-sub">SWARM</span>
+              </div>
+              <div class="node-tag node-cfo">Hospital CFO</div>
+              <div class="node-tag node-tpa">Insurance TPA</div>
+              <div class="node-tag node-doc">Chief Surgeon</div>
+              <div class="node-tag node-pat">Consumer Forum</div>
+            </div>
           </div>
           <button class="scroll-down-btn" @click="scrollToDashboard" title="Scroll to Console">
             ↓
@@ -65,81 +96,81 @@
         <!-- Left Panel: Status & Workflow Sequence -->
         <div class="left-panel">
           <div class="panel-header">
-            <span class="status-dot">■</span> System Status
+            <span class="status-dot">■</span> The 7 Core Innovations
           </div>
 
-          <h2 class="section-title">Ready</h2>
+          <h2 class="section-title">Miro Swarm Lab Active</h2>
           <p class="section-desc">
-            Prediction engine on standby. Upload reality seeds or choose a scenario preset to initialize a simulation sequence.
+            Autonomous multi-agent rehearsal engine running locally on CPU. Ingest reality seeds or trigger scenario presets to simulate stakeholder retaliation loops.
           </p>
 
           <!-- Metric Cards -->
           <div class="metrics-row">
             <div class="metric-card">
               <div class="metric-value">Zero API Cost</div>
-              <div class="metric-label">Runs locally on CPU</div>
+              <div class="metric-label">100% Local CPU Inference</div>
             </div>
             <div class="metric-card">
-              <div class="metric-value">OASIS Swarm</div>
-              <div class="metric-label">Autonomous multi-agent twin</div>
+              <div class="metric-value">120-Hr Swarm</div>
+              <div class="metric-label">OASIS Multi-World Twin</div>
             </div>
           </div>
 
           <!-- 5-Step Workflow Sequence -->
           <div class="steps-container">
             <div class="steps-header">
-              <span class="diamond-icon">◇</span> Workflow Sequence
+              <span class="diamond-icon">◇</span> Workflow & Causal Architecture
             </div>
             <div class="workflow-list">
               <div class="workflow-item">
                 <span class="step-num">01</span>
                 <div class="step-info">
-                  <div class="step-title">Graph Build</div>
-                  <div class="step-desc">Seed extraction, entity-relationship ontology &amp; knowledge graph construction</div>
+                  <div class="step-title">Enterprise Digital Twin</div>
+                  <div class="step-desc">9 entity classes, 8 relation types & causal DAG knowledge graph construction</div>
                 </div>
               </div>
               <div class="workflow-item">
                 <span class="step-num">02</span>
                 <div class="step-info">
-                  <div class="step-title">Env Setup</div>
-                  <div class="step-desc">Entity extraction, OASIS persona generation &amp; stakeholder config injection</div>
+                  <div class="step-title">Adversarial Swarm</div>
+                  <div class="step-desc">OASIS synthetic stakeholder personas probing balance sheet loopholes</div>
                 </div>
               </div>
               <div class="workflow-item">
                 <span class="step-num">03</span>
                 <div class="step-info">
-                  <div class="step-title">Run Simulation</div>
-                  <div class="step-desc">Multi-turn parallel simulation across social media sandboxes (Twitter / Reddit)</div>
+                  <div class="step-title">Causal Counterfactuals</div>
+                  <div class="step-desc">Pearl do(X=x) policy interventions & multi-world isolation</div>
                 </div>
               </div>
               <div class="workflow-item">
                 <span class="step-num">04</span>
                 <div class="step-info">
-                  <div class="step-title">Report Generation</div>
-                  <div class="step-desc">ReACT analytical report evaluating causal outcomes, metrics &amp; risk factors</div>
+                  <div class="step-title">120-Hr Sandbox</div>
+                  <div class="step-desc">Continuous parallel simulation across Twitter & Reddit sandboxes</div>
                 </div>
               </div>
               <div class="workflow-item">
                 <span class="step-num">05</span>
                 <div class="step-info">
-                  <div class="step-title">Deep Interaction</div>
-                  <div class="step-desc">Direct 1-on-1 interview dialogue with any synthetic stakeholder agent</div>
+                  <div class="step-title">Retaliation Report</div>
+                  <div class="step-desc">ReACT causal report evaluating margin shifts & seeding Ecosystem Guard</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right Panel: Interactive Simulation Console -->
+        <!-- Right Panel: Reality Seed & Simulation Input -->
         <div class="right-panel">
           <div class="console-box">
             <!-- 01: Reality Seed Upload -->
             <div class="console-section">
               <div class="console-header">
-                <span class="console-label">01 / Reality Seed</span>
+                <span class="console-label">01 / Reality Seed & Policy Directive</span>
                 <div class="header-actions">
-                  <button type="button" class="sample-btn" @click.prevent="loadSampleSeed" :disabled="loading">
-                    + Load Sample Seed
+                  <button type="button" class="sample-btn" @click="loadSampleSeed">
+                    + Load Healthcare Mandate Seed
                   </button>
                   <span class="console-meta">PDF, MD, TXT</span>
                 </div>
@@ -147,7 +178,7 @@
 
               <div
                 class="upload-zone"
-                :class="{ 'drag-over': isDragOver, 'has-files': files.length > 0 }"
+                :class="{ 'is-dragover': isDragOver, 'has-files': files.length > 0 }"
                 @dragover.prevent="handleDragOver"
                 @dragleave.prevent="handleDragLeave"
                 @drop.prevent="handleDrop"
@@ -158,9 +189,8 @@
                   type="file"
                   multiple
                   accept=".pdf,.md,.txt"
-                  @change="handleFileSelect"
                   style="display: none"
-                  :disabled="loading"
+                  @change="handleFileSelect"
                 />
 
                 <div v-if="files.length === 0" class="upload-placeholder">
@@ -169,19 +199,21 @@
                   <div class="upload-hint">or click to browse from disk</div>
                 </div>
 
-                <div v-else class="file-list">
-                  <div v-for="(file, index) in files" :key="index" class="file-item" @click.stop>
-                    <span class="file-icon">📄</span>
+                <div v-else class="file-tags-list" @click.stop>
+                  <div
+                    v-for="(file, idx) in files"
+                    :key="idx"
+                    class="file-chip"
+                  >
                     <span class="file-name">{{ file.name }}</span>
-                    <button @click.stop="removeFile(index)" class="remove-btn" title="Remove file">×</button>
+                    <button type="button" class="file-remove" @click.stop="removeFile(idx)">×</button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Divider -->
             <div class="console-divider">
-              <span>Input Parameters</span>
+              <span>Decision Parameters</span>
             </div>
 
             <!-- 02: Simulation Prompt & Presets -->
@@ -190,7 +222,7 @@
                 <span class="console-label">>_ 02 / Simulation Prompt</span>
               </div>
 
-              <!-- Quick Presets -->
+              <!-- Presets Row -->
               <div class="presets-row">
                 <span class="preset-label">Presets:</span>
                 <button 
@@ -223,11 +255,11 @@
                 <textarea
                   v-model="formData.simulationRequirement"
                   class="code-input"
-                  placeholder="// Describe your policy change, business decision, or simulation objective..."
+                  placeholder="// Describe your policy change, tariff ceiling, or business restructuring directive to rehearse..."
                   rows="5"
                   :disabled="loading"
                 ></textarea>
-                <div class="model-badge">Engine: Antigravity-Qwen2.5-Local</div>
+                <div class="model-badge">Engine: Antigravity-Qwen2.5-Local-CPU</div>
               </div>
             </div>
 
@@ -238,12 +270,12 @@
                 @click="startSimulation"
                 :disabled="!canSubmit || loading"
               >
-                <span v-if="!loading">START SIMULATION ENGINE</span>
+                <span v-if="!loading">INITIALIZE MIRO SWARM ENGINE</span>
                 <span v-else>INITIALIZING ENGINE...</span>
                 <span class="btn-arrow">→</span>
               </button>
               <div v-if="!canSubmit && files.length === 0" class="btn-hint">
-                * Please attach at least 1 reality seed document (or click 'Load Sample Seed') and specify a prompt.
+                * Please attach at least 1 reality seed document (or click 'Load Healthcare Mandate Seed') and specify a prompt.
               </div>
             </div>
           </div>
@@ -260,7 +292,6 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import HistoryDatabase from '../components/HistoryDatabase.vue'
-import LanguageSwitcher from '../components/LanguageSwitcher.vue'
 
 const router = useRouter()
 const dashboardRef = ref(null)
@@ -449,29 +480,37 @@ const startSimulation = () => {
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 5px 14px;
   border-radius: 20px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
 }
 
 .status-dot-pulse {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   background: #10b981;
   border-radius: 50%;
   box-shadow: 0 0 8px #10b981;
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .status-text {
-  color: #d1d5db;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #e5e7eb;
 }
 
 .zero-cost-tag {
-  color: #ff4500;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
   background: rgba(255, 69, 0, 0.15);
+  color: #ff4500;
   padding: 1px 6px;
   border-radius: 3px;
-  font-size: 0.7rem;
+  font-weight: 600;
 }
 
 .nav-links {
@@ -480,115 +519,180 @@ const startSimulation = () => {
   gap: 16px;
 }
 
-.github-link {
-  color: #ffffff;
-  text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 500;
+.nav-btn-highlight {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
+  background: rgba(255, 69, 0, 0.15);
+  color: #ff4500;
+  border: 1px solid rgba(255, 69, 0, 0.4);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-decoration: none;
   transition: all 0.2s;
 }
 
-.github-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
+.nav-btn-highlight:hover {
+  background: #ff4500;
+  color: #ffffff;
 }
 
-.arrow {
+.nav-btn-secondary {
+  color: #d1d5db;
+  border: 1px solid #374151;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.nav-btn-secondary:hover {
+  border-color: #9ca3af;
+  color: #ffffff;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #9ca3af;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.github-link:hover {
+  color: #ffffff;
+}
+
+/* Intelligence Banner */
+.intelligence-banner {
+  background: linear-gradient(90deg, #181924 0%, #11121a 100%);
+  border-bottom: 1px solid #282d3f;
+  padding: 10px 40px;
+}
+
+.banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: #d1d5db;
+}
+
+.banner-badge {
+  background: #ff4500;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.banner-text {
+  flex: 1;
+}
+
+.banner-cta {
   color: #ff4500;
-  font-weight: bold;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: opacity 0.2s;
+}
+
+.banner-cta:hover {
+  text-decoration: underline;
 }
 
 /* Main Content */
 .main-content {
-  max-width: 1360px;
+  padding: 40px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 40px 32px 80px;
 }
 
 /* Hero Section */
 .hero-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 50px 0 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 60px;
   border-bottom: 1px solid #e5e7eb;
   position: relative;
 }
 
 .hero-left {
-  max-width: 760px;
+  position: relative;
 }
 
 .tag-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .orange-tag {
   background: #ff4500;
   color: #ffffff;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 600;
   padding: 4px 10px;
   letter-spacing: 0.5px;
-  border-radius: 2px;
-  text-transform: uppercase;
 }
 
 .version-text {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: #6b7280;
-  font-weight: 600;
+  font-size: 0.75rem;
+  color: #9ca3af;
 }
 
 .main-title {
-  font-size: 3.4rem;
+  font-family: var(--font-sans);
+  font-size: 3.2rem;
+  line-height: 1.1;
   font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -1px;
   margin-bottom: 24px;
-  color: #0a0a0c;
+  letter-spacing: -0.02em;
 }
 
 .gradient-text {
-  color: #ff4500;
+  background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-desc {
-  font-size: 1.15rem;
-  color: #4b5563;
-  line-height: 1.6;
-  max-width: 680px;
+  max-width: 520px;
 }
 
-.highlight-bold {
-  font-weight: 700;
-  color: #0a0a0c;
+.hero-desc p {
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
 }
 
 .slogan-text {
-  margin-top: 16px;
   font-family: var(--font-mono);
-  font-size: 0.95rem;
-  color: #111827;
+  font-size: 0.85rem !important;
+  color: #ff4500 !important;
   font-weight: 600;
 }
 
 .blinking-cursor {
-  color: #ff4500;
-  font-weight: bold;
-  animation: blink 1s step-end infinite;
+  animation: blink 1s infinite;
 }
 
 @keyframes blink {
@@ -596,95 +700,189 @@ const startSimulation = () => {
   50% { opacity: 0; }
 }
 
+.decoration-square {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 4px;
+  background: #ff4500;
+}
+
+/* Digital Twin Visual Graphic */
 .hero-right {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  position: relative;
 }
 
-.logo-container {
+.twin-visual-box {
+  width: 100%;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.digital-twin-orb {
+  position: relative;
   width: 260px;
   height: 260px;
-  border: 1px solid #e5e7eb;
-  padding: 12px;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.hero-logo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+.orb-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 69, 0, 0.4);
 }
+
+.ring-1 {
+  width: 100%;
+  height: 100%;
+  animation: rotate-clockwise 25s linear infinite;
+}
+
+.ring-2 {
+  width: 78%;
+  height: 78%;
+  border: 1.5px solid rgba(31, 41, 55, 0.3);
+  animation: rotate-counter 20s linear infinite;
+}
+
+.ring-3 {
+  width: 56%;
+  height: 56%;
+  border: 1.5px dotted rgba(255, 69, 0, 0.6);
+  animation: rotate-clockwise 15s linear infinite;
+}
+
+@keyframes rotate-clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-counter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.orb-core {
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, #ff4500 0%, #0a0a0c 80%);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(255, 69, 0, 0.4);
+  z-index: 2;
+}
+
+.core-label {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.core-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #ffaa80;
+  letter-spacing: 0.5px;
+}
+
+.node-tag {
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 3;
+}
+
+.node-cfo { top: 0; left: 10%; color: #dc2626; border-color: rgba(220, 38, 38, 0.3); }
+.node-tpa { bottom: 10%; left: 0; color: #2563eb; border-color: rgba(37, 99, 235, 0.3); }
+.node-doc { top: 20%; right: 0; color: #16a34a; border-color: rgba(22, 163, 74, 0.3); }
+.node-pat { bottom: 0; right: 15%; color: #d97706; border-color: rgba(217, 119, 6, 0.3); }
 
 .scroll-down-btn {
-  width: 44px;
-  height: 44px;
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  color: #111827;
-  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
 .scroll-down-btn:hover {
-  background: #0a0a0c;
-  color: #ffffff;
-  border-color: #0a0a0c;
+  border-color: #ff4500;
+  color: #ff4500;
   transform: translateY(2px);
 }
 
 /* Dashboard Section */
 .dashboard-section {
   display: grid;
-  grid-template-columns: 460px 1fr;
+  grid-template-columns: 420px 1fr;
   gap: 40px;
   padding-top: 60px;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
 }
 
 /* Left Panel */
 .left-panel {
-  border-right: 1px solid #e5e7eb;
-  padding-right: 36px;
+  display: flex;
+  flex-direction: column;
 }
 
 .panel-header {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 1.5px;
-  color: #6b7280;
+  color: #9ca3af;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  letter-spacing: 1px;
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 12px;
 }
 
 .status-dot {
-  color: #10b981;
+  color: #ff4500;
+  font-size: 0.8rem;
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  margin-bottom: 12px;
-  color: #0a0a0c;
+  font-family: var(--font-sans);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #111827;
 }
 
 .section-desc {
-  font-size: 0.95rem;
   color: #6b7280;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.5;
   margin-bottom: 24px;
 }
 
@@ -696,16 +894,17 @@ const startSimulation = () => {
 }
 
 .metric-card {
+  background: #f9fafb;
   border: 1px solid #e5e7eb;
   padding: 16px;
-  background: #f9fafb;
+  border-radius: 6px;
 }
 
 .metric-value {
   font-family: var(--font-mono);
+  font-weight: 700;
   font-size: 1.1rem;
-  font-weight: 800;
-  color: #0a0a0c;
+  color: #111827;
   margin-bottom: 4px;
 }
 
@@ -714,19 +913,18 @@ const startSimulation = () => {
   color: #6b7280;
 }
 
-/* Workflow Sequence */
 .steps-container {
-  border-top: 1px solid #e5e7eb;
-  padding-top: 24px;
+  background: #fafbfc;
+  border: 1px solid #e5e7eb;
+  padding: 24px;
+  border-radius: 8px;
 }
 
 .steps-header {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #111827;
+  font-weight: 600;
+  color: #374151;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -740,72 +938,65 @@ const startSimulation = () => {
 .workflow-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .workflow-item {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
 }
 
 .step-num {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #ff4500;
-  background: rgba(255, 69, 0, 0.08);
-  padding: 2px 6px;
-  border-radius: 2px;
-}
-
-.step-info {
-  flex: 1;
 }
 
 .step-title {
+  font-weight: 600;
   font-size: 0.9rem;
-  font-weight: 700;
   color: #111827;
   margin-bottom: 2px;
 }
 
 .step-desc {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: #6b7280;
   line-height: 1.4;
 }
 
-/* Right Panel: Console */
+/* Right Panel Console */
 .right-panel {
   display: flex;
   flex-direction: column;
 }
 
 .console-box {
-  border: 1px solid #0a0a0c;
   background: #ffffff;
-  box-shadow: 6px 6px 0px #0a0a0c;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
 }
 
 .console-section {
-  padding: 24px;
+  padding: 28px;
 }
 
 .console-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .console-label {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: #0a0a0c;
-  text-transform: uppercase;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.5px;
 }
 
 .header-actions {
@@ -815,163 +1006,127 @@ const startSimulation = () => {
 }
 
 .sample-btn {
-  background: #f3f4f6;
-  border: 1px solid #d1d5db;
-  color: #111827;
+  background: rgba(255, 69, 0, 0.08);
+  color: #ff4500;
+  border: 1px solid rgba(255, 69, 0, 0.25);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 3px;
+  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.sample-btn:hover:not(:disabled) {
+.sample-btn:hover {
   background: #ff4500;
   color: #ffffff;
-  border-color: #ff4500;
 }
 
 .console-meta {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #9ca3af;
 }
 
-/* Upload Zone */
 .upload-zone {
   border: 2px dashed #d1d5db;
-  padding: 28px 20px;
+  border-radius: 6px;
+  padding: 32px 20px;
   text-align: center;
-  background: #f9fafb;
   cursor: pointer;
+  background: #fafbfc;
   transition: all 0.2s;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.upload-zone:hover,
-.upload-zone.drag-over {
+.upload-zone:hover, .upload-zone.is-dragover {
   border-color: #ff4500;
-  background: rgba(255, 69, 0, 0.03);
-}
-
-.upload-zone.has-files {
-  padding: 16px;
-  border-style: solid;
-  border-color: #e5e7eb;
-  background: #ffffff;
+  background: rgba(255, 69, 0, 0.02);
 }
 
 .upload-icon {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #ff4500;
-  margin-bottom: 6px;
-  font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .upload-title {
-  font-size: 0.95rem;
   font-weight: 600;
+  font-size: 0.95rem;
   color: #111827;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .upload-hint {
-  font-size: 0.8rem;
-  color: #9ca3af;
+  font-size: 0.78rem;
+  color: #6b7280;
 }
 
-.file-list {
+.file-tags-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 8px;
-  width: 100%;
+  justify-content: center;
 }
 
-.file-item {
+.file-chip {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 6px 12px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  padding: 8px 12px;
-  border-radius: 4px;
-}
-
-.file-icon {
-  font-size: 1.1rem;
-}
-
-.file-name {
-  flex: 1;
+  gap: 8px;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: #111827;
-  text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 0.8rem;
 }
 
-.remove-btn {
+.file-remove {
   background: transparent;
   border: none;
   color: #9ca3af;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  line-height: 1;
-  padding: 0 4px;
 }
 
-.remove-btn:hover {
+.file-remove:hover {
   color: #ef4444;
 }
 
-/* Console Divider */
 .console-divider {
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  background: #f3f4f6;
-  height: 32px;
-  border-top: 1px solid #e5e7eb;
-  border-bottom: 1px solid #e5e7eb;
+  border-top: 1px solid #f3f4f6;
+  border-bottom: 1px solid #f3f4f6;
+  background: #f9fafb;
+  padding: 8px 28px;
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #6b7280;
+  color: #9ca3af;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Presets Row */
 .presets-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
   flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .preset-label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: #6b7280;
-  font-weight: 600;
 }
 
 .preset-chip {
   background: #f3f4f6;
   border: 1px solid #e5e7eb;
-  color: #374151;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 0.78rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  border-radius: 12px;
+  color: #374151;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -985,107 +1140,86 @@ const startSimulation = () => {
   background: rgba(255, 69, 0, 0.1);
   border-color: #ff4500;
   color: #ff4500;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* Textarea Input */
 .input-wrapper {
   position: relative;
 }
 
 .code-input {
   width: 100%;
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  background: #0d1017;
+  color: #f3f4f6;
+  border: 1px solid #1f2937;
+  border-radius: 6px;
   padding: 16px;
-  padding-bottom: 36px;
-  background: #f9fafb !important;
-  border: 1px solid #d1d5db !important;
-  color: #111827 !important;
-  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
   resize: vertical;
 }
 
 .code-input:focus {
-  border-color: #ff4500 !important;
-  box-shadow: 0 0 0 2px rgba(255, 69, 0, 0.15) !important;
+  outline: none;
+  border-color: #ff4500;
 }
 
 .model-badge {
   position: absolute;
-  bottom: 10px;
+  bottom: 12px;
   right: 12px;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: #9ca3af;
-  background: #ffffff;
-  padding: 2px 6px;
-  border: 1px solid #e5e7eb;
-  border-radius: 2px;
+  background: #1f2937;
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 
-/* Start Button Section */
 .btn-section {
-  padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #f3f4f6;
+  background: #fafbfc;
 }
 
 .start-engine-btn {
   width: 100%;
-  height: 56px;
   background: #ff4500;
   color: #ffffff;
-  border: 2px solid #0a0a0c;
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
   font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  box-shadow: 4px 4px 0px #0a0a0c;
-  cursor: pointer;
   transition: all 0.2s;
 }
 
 .start-engine-btn:hover:not(:disabled) {
   background: #e03d00;
-  transform: translate(-1px, -1px);
-  box-shadow: 5px 5px 0px #0a0a0c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.25);
 }
 
 .start-engine-btn:disabled {
-  background: #e5e7eb;
-  color: #9ca3af;
-  border-color: #d1d5db;
-  box-shadow: none;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .btn-arrow {
   font-size: 1.2rem;
-  font-weight: bold;
 }
 
 .btn-hint {
-  font-family: var(--font-mono);
   font-size: 0.75rem;
   color: #ef4444;
-  margin-top: 8px;
+  margin-top: 10px;
   text-align: center;
-}
-
-@media (max-width: 1024px) {
-  .dashboard-section {
-    grid-template-columns: 1fr;
-  }
-  .left-panel {
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
-    padding-right: 0;
-    padding-bottom: 36px;
-  }
 }
 </style>

@@ -4,7 +4,7 @@
     <header class="app-header">
       <div class="header-left">
         <div class="brand" @click="router.push('/')">
-          MIROFISH <span class="brand-badge">AGY-SWARM</span>
+          MIRO SWARM <span class="brand-badge">DECISION TWIN</span>
         </div>
       </div>
       
