@@ -23,6 +23,134 @@
                 Launch Ecosystem Guard ↗
               </a>
             </div>
+
+            <!-- STAKEHOLDER APPROVAL & DECISION GATE (>80% THRESHOLD) -->
+            <div class="decision-gate-card" :class="prdEval.positive_score > 80 ? 'gate-approved' : 'gate-friction'">
+              <div class="decision-header">
+                <div class="gate-status-pill" :class="prdEval.positive_score > 80 ? 'status-green' : 'status-orange'">
+                  <span class="status-icon">{{ prdEval.positive_score > 80 ? '✓' : '⚠' }}</span>
+                  <span>{{ prdEval.status_label }}</span>
+                </div>
+                <div class="threshold-tag">
+                  <span>DECISION RULE: &gt; 80% APPROVAL TO MAKE</span>
+                </div>
+              </div>
+
+              <!-- Gauge & Progress Section -->
+              <div class="approval-gauge-section">
+                <div class="score-numbers-row">
+                  <div class="score-current">
+                    <span class="num-big" :class="prdEval.positive_score > 80 ? 'text-green' : 'text-orange'">
+                      {{ prdEval.positive_score }}%
+                    </span>
+                    <span class="num-sub">Target Stakeholders Positive</span>
+                  </div>
+                  <div class="score-divider">vs</div>
+                  <div class="score-target">
+                    <span class="num-target">80.0%</span>
+                    <span class="num-sub">Required Production Gate</span>
+                  </div>
+                </div>
+
+                <!-- Custom Visual Progress Bar with 80% Gate Marker -->
+                <div class="gauge-track-container">
+                  <div class="gauge-track">
+                    <div 
+                      class="gauge-fill" 
+                      :style="{ width: prdEval.positive_score + '%' }"
+                      :class="prdEval.positive_score > 80 ? 'bg-green' : 'bg-orange'"
+                    ></div>
+                    <div class="gate-marker" style="left: 80%;">
+                      <div class="marker-line"></div>
+                      <span class="marker-tag">80% Gate</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stakeholder Sentiment Breakdown Grid -->
+              <div class="stakeholders-breakdown">
+                <div class="breakdown-title">Target Stakeholders Empirical Sentiment</div>
+                <div class="stk-grid">
+                  <div 
+                    v-for="stk in prdEval.stakeholder_scores" 
+                    :key="stk.name" 
+                    class="stk-item"
+                    :class="stk.sentiment.toLowerCase()"
+                  >
+                    <div class="stk-top">
+                      <span class="stk-avatar">{{ stk.avatar }}</span>
+                      <span class="stk-name">{{ stk.name }}</span>
+                      <span class="stk-score-badge">{{ stk.score }}%</span>
+                    </div>
+                    <div class="stk-verdict">{{ stk.verdict }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dissenting Critical Objections -->
+              <div v-if="prdEval.critical_objections?.length" class="critical-objections-box">
+                <div class="objections-header">
+                  <span class="obj-icon">⚡</span>
+                  <span>Dissenting Retaliation Objections Identified by Swarm:</span>
+                </div>
+                <ul class="objections-list">
+                  <li v-for="(obj, idx) in prdEval.critical_objections" :key="idx">
+                    {{ obj }}
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Action Bar: Make vs Refine Decision -->
+              <div class="decision-actions-row">
+                <template v-if="prdEval.positive_score <= 80">
+                  <div class="decision-guidance">
+                    <strong>Gate Decision: REFINE INITIAL PLAN</strong>
+                    <span>Approval score is {{ prdEval.positive_score }}% (&le; 80% Threshold). Refine PRD with local Ollama to patch objections and elevate approval.</span>
+                  </div>
+                  <div class="decision-buttons">
+                    <button class="btn-refine-primary" @click="goToRefinePrd">
+                      <span>🔄 REFINE INITIAL PLAN / PRD (LOCAL OLLAMA AI)</span>
+                      <span class="arrow">&rarr;</span>
+                    </button>
+                    <button class="btn-override-secondary" @click="triggerMakeProduct">
+                      <span>⚠️ MAKE PRODUCT ANYWAY (OVERRIDE)</span>
+                    </button>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="decision-guidance approved">
+                    <strong>Gate Decision: APPROVED FOR PRODUCTION (&gt;80% Positive)</strong>
+                    <span>Approval score reached {{ prdEval.positive_score }}%! Retaliation loopholes patched. Ready to deploy startup code.</span>
+                  </div>
+                  <div class="decision-buttons">
+                    <button class="btn-make-primary" @click="triggerMakeProduct">
+                      <span>🚀 MAKE PRODUCT (DEPLOY STARTUP CODE)</span>
+                      <span class="arrow">&rarr;</span>
+                    </button>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- Make Product Success Modal -->
+            <div v-if="makeSuccessModal" class="product-modal-backdrop" @click="makeSuccessModal = false">
+              <div class="product-modal-card" @click.stop>
+                <div class="modal-icon">🛡️</div>
+                <h3 class="modal-title">Startup Codebase Instantiated</h3>
+                <p class="modal-desc">
+                  Based on the validated PRD (Stakeholder Approval: <strong>{{ prdEval.positive_score }}%</strong>), the <strong>Ecosystem Guard</strong> autonomous defense engine has been deployed on Port 3002.
+                </p>
+                <div class="modal-actions">
+                  <a href="/guard/" target="_blank" class="btn-open-guard">
+                    Open Ecosystem Guard Dashboard ↗
+                  </a>
+                  <button class="btn-close-modal" @click="makeSuccessModal = false">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
             <div class="header-divider"></div>
           </div>
 
@@ -404,6 +532,7 @@ import { ref, computed, watch, onMounted, onUnmounted, nextTick, h, reactive } f
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { getAgentLog, getConsoleLog } from '../api/report'
+import { getPrdEvaluation, makeProduct } from '../api/prd'
 
 const router = useRouter()
 const { t } = useI18n()
@@ -416,10 +545,73 @@ const props = defineProps({
 
 const emit = defineEmits(['add-log', 'update-status'])
 
+// PRD Evaluation & Decision Gate State
+const prdEval = ref({
+  report_id: props.reportId || 'rep_healthcare_pricing',
+  prd_version: 'v1.0 (Initial Proposal)',
+  positive_score: 62.5,
+  threshold: 80.0,
+  is_approved: false,
+  status: 'FRICTION_DETECTED',
+  status_label: 'Market Friction Detected (62.5% <= 80% Threshold)',
+  summary: 'Target stakeholder approval is 62.5%, falling short of the required 80% threshold. The simulation discovered severe institutional defiance (88.4%) and an immediate +42.6% compensatory markup in Operating Theater fees.',
+  recommended_action: 'REFINE',
+  stakeholder_scores: [
+    { name: 'Patients / Consumers', score: 91.0, sentiment: 'Positive', avatar: '👤', verdict: 'Supports room rent cap, but vulnerable to discharge bill shock from OT hikes' },
+    { name: 'Insurance TPAs', score: 71.0, sentiment: 'Neutral', avatar: '📑', verdict: 'Detects unbundled consumable lines; will dispute and deduct claims' },
+    { name: 'Chief Medical Specialists', score: 38.0, sentiment: 'Negative', avatar: '🩺', verdict: 'Rejects generic low-cost consumables; demands non-generic clinical safety' },
+    { name: 'Corporate Hospital CFOs', score: 18.0, sentiment: 'Negative', avatar: '💼', verdict: 'Fiercely retaliates against room margin loss by inflating OT pack charges by +42.6%' }
+  ],
+  critical_objections: [
+    "Apollo Hospital CFO: Mandated room rent cuts directly impair hospital ARPOB; hospital will actively compensate by inflating OT surgical kit fees by +42.6%.",
+    "Dr. Ananya Sharma (Surgeon): Low-cost sutures and generic consumables increase complication risks; clinical team refuses generic-only mandates.",
+    "Star Health TPA: Inpatient bills with unbundled 'biomedical hygiene' items will trigger cashless denial and consumer billing disputes."
+  ]
+})
+
+const makeSuccessModal = ref(false)
+const isMakingProduct = ref(false)
+
+const loadPrdEvaluation = async () => {
+  try {
+    const res = await getPrdEvaluation(props.reportId || 'rep_healthcare_pricing')
+    if (res.success && res.data) {
+      prdEval.value = res.data
+    }
+  } catch (err) {
+    console.warn('Prd evaluation fetch fallback:', err)
+  }
+}
+
 // Navigation
 const goToInteraction = () => {
   if (props.reportId) {
     router.push({ name: 'Interaction', params: { reportId: props.reportId } })
+  }
+}
+
+const goToRefinePrd = () => {
+  const targetId = props.reportId || 'rep_healthcare_pricing'
+  router.push({
+    name: 'Interaction',
+    params: { reportId: targetId },
+    query: { tab: 'refine' }
+  })
+}
+
+const triggerMakeProduct = async () => {
+  isMakingProduct.value = true
+  try {
+    await makeProduct({
+      prd_version: prdEval.value.prd_version,
+      target_score: prdEval.value.positive_score
+    })
+    makeSuccessModal.value = true
+  } catch (err) {
+    console.error('Make product error:', err)
+    window.open('/guard/', '_blank')
+  } finally {
+    isMakingProduct.value = false
   }
 }
 
@@ -2187,6 +2379,7 @@ const stopPolling = () => {
 
 // Lifecycle
 onMounted(() => {
+  loadPrdEvaluation()
   if (props.reportId) {
     addLog(`Report Agent initialized: ${props.reportId}`)
     startPolling()
@@ -2199,6 +2392,7 @@ onUnmounted(() => {
 
 watch(() => props.reportId, (newId) => {
   if (newId) {
+    loadPrdEvaluation()
     agentLogs.value = []
     consoleLogs.value = []
     agentLogLine.value = 0
@@ -5214,6 +5408,398 @@ watch(() => props.reportId, (newId) => {
   background: #e03d00;
   transform: translateY(-1px);
 }
+
+/* STAKEHOLDER APPROVAL & DECISION GATE STYLES */
+.decision-gate-card {
+  margin: 20px 0;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+.decision-gate-card.gate-friction {
+  border-left: 5px solid #f97316;
+  background: linear-gradient(180deg, #fffbf7 0%, #ffffff 100%);
+}
+.decision-gate-card.gate-approved {
+  border-left: 5px solid #10b981;
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+.decision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.gate-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.gate-status-pill.status-orange {
+  background: #ffedd5;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+.gate-status-pill.status-green {
+  background: #d1fae5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.threshold-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Gauge & Numbers */
+.approval-gauge-section {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+.score-numbers-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.num-big {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 800;
+  display: block;
+}
+.num-big.text-orange { color: #ea580c; }
+.num-big.text-green { color: #059669; }
+.num-target {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #475569;
+  display: block;
+}
+.num-sub {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.score-divider {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Track & 80% Marker */
+.gauge-track-container {
+  padding: 0 10px;
+}
+.gauge-track {
+  position: relative;
+  height: 16px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  overflow: visible;
+}
+.gauge-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gauge-fill.bg-orange {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+}
+.gauge-fill.bg-green {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+.gate-marker {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+.marker-line {
+  width: 2px;
+  height: 28px;
+  background: #0f172a;
+}
+.marker-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+/* Stakeholder Breakdown Grid */
+.stakeholders-breakdown {
+  margin-bottom: 20px;
+}
+.breakdown-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.stk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+.stk-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+.stk-item.positive {
+  border-left: 3px solid #10b981;
+}
+.stk-item.neutral {
+  border-left: 3px solid #f59e0b;
+}
+.stk-item.negative {
+  border-left: 3px solid #ef4444;
+}
+.stk-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.stk-avatar {
+  font-size: 1.1rem;
+}
+.stk-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1e293b;
+  flex: 1;
+  margin: 0 8px;
+}
+.stk-score-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.stk-verdict {
+  font-size: 0.72rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+/* Critical Objections */
+.critical-objections-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 20px;
+}
+.objections-header {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #991b1b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.objections-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.78rem;
+  color: #7f1d1d;
+  line-height: 1.5;
+}
+
+/* Decision Action Row */
+.decision-actions-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 18px;
+}
+.decision-guidance {
+  margin-bottom: 14px;
+}
+.decision-guidance strong {
+  display: block;
+  font-size: 0.85rem;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.decision-guidance span {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.4;
+}
+.decision-guidance.approved strong {
+  color: #047857;
+}
+
+.decision-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-refine-primary {
+  flex: 1;
+  min-width: 240px;
+  background: #ff4500;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.25);
+  transition: all 0.2s;
+}
+.btn-refine-primary:hover {
+  background: #e03d00;
+  transform: translateY(-1px);
+}
+.btn-override-secondary {
+  background: #ffffff;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-override-secondary:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.btn-make-primary {
+  flex: 1;
+  background: #059669;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+  transition: all 0.2s;
+}
+.btn-make-primary:hover {
+  background: #047857;
+  transform: translateY(-1px);
+}
+
+/* Modal */
+.product-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+.product-modal-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.modal-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+.modal-desc {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.btn-open-guard {
+  background: #ff4500;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.btn-close-modal {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
 </style>
 
 <style>
@@ -5272,5 +5858,397 @@ html[lang="en"] .report-header-block .main-title {
 .guard-launch-btn:hover {
   background: #e03d00;
   transform: translateY(-1px);
+}
+
+/* STAKEHOLDER APPROVAL & DECISION GATE STYLES */
+.decision-gate-card {
+  margin: 20px 0;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+.decision-gate-card.gate-friction {
+  border-left: 5px solid #f97316;
+  background: linear-gradient(180deg, #fffbf7 0%, #ffffff 100%);
+}
+.decision-gate-card.gate-approved {
+  border-left: 5px solid #10b981;
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+.decision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.gate-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.gate-status-pill.status-orange {
+  background: #ffedd5;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+.gate-status-pill.status-green {
+  background: #d1fae5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.threshold-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Gauge & Numbers */
+.approval-gauge-section {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+.score-numbers-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.num-big {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 800;
+  display: block;
+}
+.num-big.text-orange { color: #ea580c; }
+.num-big.text-green { color: #059669; }
+.num-target {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #475569;
+  display: block;
+}
+.num-sub {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.score-divider {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Track & 80% Marker */
+.gauge-track-container {
+  padding: 0 10px;
+}
+.gauge-track {
+  position: relative;
+  height: 16px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  overflow: visible;
+}
+.gauge-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gauge-fill.bg-orange {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+}
+.gauge-fill.bg-green {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+.gate-marker {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+.marker-line {
+  width: 2px;
+  height: 28px;
+  background: #0f172a;
+}
+.marker-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+/* Stakeholder Breakdown Grid */
+.stakeholders-breakdown {
+  margin-bottom: 20px;
+}
+.breakdown-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.stk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+.stk-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+.stk-item.positive {
+  border-left: 3px solid #10b981;
+}
+.stk-item.neutral {
+  border-left: 3px solid #f59e0b;
+}
+.stk-item.negative {
+  border-left: 3px solid #ef4444;
+}
+.stk-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.stk-avatar {
+  font-size: 1.1rem;
+}
+.stk-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1e293b;
+  flex: 1;
+  margin: 0 8px;
+}
+.stk-score-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.stk-verdict {
+  font-size: 0.72rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+/* Critical Objections */
+.critical-objections-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 20px;
+}
+.objections-header {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #991b1b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.objections-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.78rem;
+  color: #7f1d1d;
+  line-height: 1.5;
+}
+
+/* Decision Action Row */
+.decision-actions-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 18px;
+}
+.decision-guidance {
+  margin-bottom: 14px;
+}
+.decision-guidance strong {
+  display: block;
+  font-size: 0.85rem;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.decision-guidance span {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.4;
+}
+.decision-guidance.approved strong {
+  color: #047857;
+}
+
+.decision-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-refine-primary {
+  flex: 1;
+  min-width: 240px;
+  background: #ff4500;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.25);
+  transition: all 0.2s;
+}
+.btn-refine-primary:hover {
+  background: #e03d00;
+  transform: translateY(-1px);
+}
+.btn-override-secondary {
+  background: #ffffff;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-override-secondary:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.btn-make-primary {
+  flex: 1;
+  background: #059669;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+  transition: all 0.2s;
+}
+.btn-make-primary:hover {
+  background: #047857;
+  transform: translateY(-1px);
+}
+
+/* Modal */
+.product-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+.product-modal-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.modal-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+.modal-desc {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.btn-open-guard {
+  background: #ff4500;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.btn-close-modal {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
 }
 </style>

@@ -162,18 +162,39 @@
         </div>
 
         <!-- Right Panel: Reality Seed & Simulation Input -->
+        <!-- Right Panel: Reality Seed & Simulation Input -->
         <div class="right-panel">
           <div class="console-box">
-            <!-- 01: Reality Seed Upload -->
+            <!-- 01: Initial Idea Demonstration & PRD (.md) Upload -->
             <div class="console-section">
               <div class="console-header">
-                <span class="console-label">01 / Reality Seed & Policy Directive</span>
+                <span class="console-label">01 / Initial Idea Demonstration & PRD (.md) Upload</span>
                 <div class="header-actions">
-                  <button type="button" class="sample-btn" @click="loadSampleSeed">
-                    + Load Healthcare Mandate Seed
-                  </button>
-                  <span class="console-meta">PDF, MD, TXT</span>
+                  <span class="console-meta">Markdown (.md), TXT, PDF</span>
                 </div>
+              </div>
+
+              <!-- Demonstration Selector Chips -->
+              <div class="demo-selector-row">
+                <span class="demo-selector-label">Load Demonstration:</span>
+                <button 
+                  type="button" 
+                  class="demo-chip"
+                  :class="{ active: activeDemoKey === 'healthcare' }"
+                  @click="selectDemoTemplate('healthcare')"
+                >
+                  <span class="chip-icon">🏥</span>
+                  <span>Healthcare Pricing Regulation PRD</span>
+                </button>
+                <button 
+                  type="button" 
+                  class="demo-chip"
+                  :class="{ active: activeDemoKey === 'saas' }"
+                  @click="selectDemoTemplate('saas')"
+                >
+                  <span class="chip-icon">💻</span>
+                  <span>B2B AI Pricing Transparency PRD</span>
+                </button>
               </div>
 
               <div
@@ -188,15 +209,15 @@
                   ref="fileInput"
                   type="file"
                   multiple
-                  accept=".pdf,.md,.txt"
+                  accept=".pdf,.md,.txt,.markdown"
                   style="display: none"
                   @change="handleFileSelect"
                 />
 
                 <div v-if="files.length === 0" class="upload-placeholder">
                   <div class="upload-icon">↑</div>
-                  <div class="upload-title">Drag reality seed documents here</div>
-                  <div class="upload-hint">or click to browse from disk</div>
+                  <div class="upload-title">Drop your Idea Demonstration (.md) file here</div>
+                  <div class="upload-hint">or click to browse from local disk</div>
                 </div>
 
                 <div v-else class="file-tags-list" @click.stop>
@@ -205,8 +226,41 @@
                     :key="idx"
                     class="file-chip"
                   >
+                    <span class="file-badge">.MD</span>
                     <span class="file-name">{{ file.name }}</span>
                     <button type="button" class="file-remove" @click.stop="removeFile(idx)">×</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Parsed Demonstration PRD Meta Card -->
+              <div v-if="demonstrationMeta" class="prd-meta-card">
+                <div class="prd-meta-header">
+                  <div class="prd-meta-title-box">
+                    <span class="prd-tag">PRD DEMONSTRATION LOADED</span>
+                    <h3 class="prd-title">{{ demonstrationMeta.title }}</h3>
+                  </div>
+                  <div class="prd-threshold-badge">
+                    <span class="badge-label">DECISION GATE</span>
+                    <span class="badge-val">> 80% Approval to MAKE</span>
+                  </div>
+                </div>
+
+                <div class="prd-meta-grid">
+                  <div class="prd-meta-item">
+                    <span class="item-label">Target Stakeholders</span>
+                    <span class="item-val">{{ demonstrationMeta.target_audience }}</span>
+                  </div>
+                  <div class="prd-meta-item">
+                    <span class="item-label">Core Mandates / Pricing Terms</span>
+                    <span class="item-val">{{ demonstrationMeta.summary }}</span>
+                  </div>
+                  <div class="prd-meta-item full">
+                    <span class="item-label">Evaluation Rule</span>
+                    <span class="item-val highlight">
+                      If target stakeholder positive approval is <strong>&gt; 80%</strong> &rarr; Unlocks <strong>MAKE PRODUCT</strong>.
+                      If <strong>&le; 80%</strong> &rarr; Requires <strong>REFINE INITIAL PLAN</strong> with Local Ollama AI.
+                    </span>
                   </div>
                 </div>
               </div>
@@ -256,10 +310,10 @@
                   v-model="formData.simulationRequirement"
                   class="code-input"
                   placeholder="// Describe your policy change, tariff ceiling, or business restructuring directive to rehearse..."
-                  rows="5"
+                  rows="4"
                   :disabled="loading"
                 ></textarea>
-                <div class="model-badge">Engine: Antigravity-Qwen2.5-Local-CPU</div>
+                <div class="model-badge">Engine: Antigravity-Qwen2.5-Local-CPU · Zero Cost</div>
               </div>
             </div>
 
@@ -270,12 +324,12 @@
                 @click="startSimulation"
                 :disabled="!canSubmit || loading"
               >
-                <span v-if="!loading">INITIALIZE MIRO SWARM ENGINE</span>
-                <span v-else>INITIALIZING ENGINE...</span>
-                <span class="btn-arrow">→</span>
+                <span v-if="!loading">START AI SWARM SIMULATION (LOCAL OLLAMA ENGINE)</span>
+                <span v-else>INITIALIZING OLLAMA ENGINE...</span>
+                <span class="btn-arrow">&rarr;</span>
               </button>
-              <div v-if="!canSubmit && files.length === 0" class="btn-hint">
-                * Please attach at least 1 reality seed document (or click 'Load Healthcare Mandate Seed') and specify a prompt.
+              <div v-if="!canSubmit" class="btn-hint">
+                Please upload or select an Idea Demonstration PRD (.md) and specify simulation requirement
               </div>
             </div>
           </div>
@@ -306,6 +360,13 @@ const error = ref('')
 const isDragOver = ref(false)
 const fileInput = ref(null)
 const activePreset = ref('')
+const activeDemoKey = ref('healthcare')
+const demonstrationMeta = ref({
+  title: 'National Healthcare Pricing Regulation & Anti-Retaliation PRD (2025-2026)',
+  summary: 'Mandates private hospital room rent caps at Rs. 4,000/day and 15% maximum markup on surgical consumables.',
+  target_audience: 'Patients, Corporate Hospital CFOs, Medical Specialists, Insurance TPAs',
+  threshold: 80.0
+})
 
 const canSubmit = computed(() => {
   return formData.value.simulationRequirement.trim() !== '' && files.value.length > 0
@@ -320,6 +381,7 @@ const triggerFileInput = () => {
 const handleFileSelect = (event) => {
   const selectedFiles = Array.from(event.target.files)
   addFiles(selectedFiles)
+  parseUploadedFileMeta(selectedFiles[0])
 }
 
 const handleDragOver = () => {
@@ -337,6 +399,28 @@ const handleDrop = (e) => {
   if (loading.value) return
   const droppedFiles = Array.from(e.dataTransfer.files)
   addFiles(droppedFiles)
+  if (droppedFiles.length > 0) {
+    parseUploadedFileMeta(droppedFiles[0])
+  }
+}
+
+const parseUploadedFileMeta = (file) => {
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    const text = e.target.result
+    activeDemoKey.value = 'custom'
+    demonstrationMeta.value = {
+      title: file.name.replace(/\.[^/.]+$/, "").replace(/_/g, " "),
+      summary: text.slice(0, 180) + '...',
+      target_audience: 'Identified Target Stakeholders from Demonstration Spec',
+      threshold: 80.0
+    }
+    if (!formData.value.simulationRequirement.trim()) {
+      formData.value.simulationRequirement = `Simulate target stakeholder reaction to policy: ${file.name}`
+    }
+  }
+  reader.readAsText(file)
 }
 
 const addFiles = (newFiles) => {
@@ -355,6 +439,55 @@ const addFiles = (newFiles) => {
 
 const removeFile = (index) => {
   files.value.splice(index, 1)
+  if (files.value.length === 0) {
+    demonstrationMeta.value = null
+  }
+}
+
+// Select Demonstration Template (Healthcare or B2B SaaS)
+const selectDemoTemplate = (demoKey) => {
+  activeDemoKey.value = demoKey
+  files.value = []
+
+  if (demoKey === 'healthcare') {
+    demonstrationMeta.value = {
+      title: 'National Healthcare Pricing Regulation & Anti-Retaliation PRD (2025-2026)',
+      summary: 'Mandates private hospital room rent caps at Rs. 4,000/day and 15% maximum markup on surgical consumables.',
+      target_audience: 'Patients, Corporate Hospital CFOs, Medical Specialists, Insurance TPAs',
+      threshold: 80.0
+    }
+    loadSampleSeed()
+    applyPreset('healthcare')
+  } else if (demoKey === 'saas') {
+    demonstrationMeta.value = {
+      title: 'B2B AI Software Usage-Based Pricing Transparency PRD',
+      summary: 'Caps seat inflation by shifting B2B AI products to pure deterministic consumption with a 15% audit variance ceiling.',
+      target_audience: 'Enterprise CIOs, SaaS Vendors, Procurement Teams, Developers',
+      threshold: 80.0
+    }
+    loadSaasSeed()
+    formData.value.simulationRequirement = 'Simulate how enterprise CIOs and SaaS software vendors react to mandatory 12% token margin caps and seat-license unbundling.'
+  }
+}
+
+const loadSaasSeed = () => {
+  const content = `# B2B AI Usage-Based Pricing Transparency PRD
+## 1. Executive Summary & Problem Statement
+SaaS vendors frequently inflate seat licenses while adding hidden token fees. Enterprise CIOs demand predictable, auditable consumption rate cards.
+
+## 2. Mandated Terms
+1. Guaranteed maximum token markup of 12% over base GPU infrastructure cost.
+2. Zero per-seat artificial licensing minimums.
+3. Real-time consumption telemetry visible to client procurement directors.
+
+## 3. Target Stakeholders
+- Enterprise CIOs and Software Buyers
+- SaaS Vendors and Account Executives
+- Cloud FinOps and Procurement Officers
+`
+  const blob = new Blob([content], { type: 'text/markdown' })
+  const sampleFile = new File([blob], 'B2B_AI_Pricing_Transparency_PRD.md', { type: 'text/markdown' })
+  addFiles([sampleFile])
 }
 
 // Load a realistic pre-configured reality seed document
@@ -397,6 +530,9 @@ const applyPreset = (presetKey) => {
     loadSampleSeed()
   }
 }
+
+// Auto-initialize with Healthcare demonstration on mount
+selectDemoTemplate('healthcare')
 
 const scrollToDashboard = () => {
   if (dashboardRef.value) {
@@ -1027,6 +1163,150 @@ const startSimulation = () => {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: #9ca3af;
+}
+
+/* Demonstration PRD Selector */
+.demo-selector-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.demo-selector-label {
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.demo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.demo-chip:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.demo-chip.active {
+  background: #fff7ed;
+  border-color: #ff4500;
+  color: #c2410c;
+  box-shadow: 0 0 0 1px #ff4500;
+}
+
+/* Parsed Demonstration Meta Card */
+.prd-meta-card {
+  margin-top: 16px;
+  background: #fdfefe;
+  border: 1px solid #fed7aa;
+  border-left: 4px solid #ff4500;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.prd-meta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.prd-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ea580c;
+  background: #ffedd5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.prd-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.prd-threshold-badge {
+  text-align: right;
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+.prd-threshold-badge .badge-label {
+  display: block;
+  font-size: 0.6rem;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.prd-threshold-badge .badge-val {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.prd-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.prd-meta-item.full {
+  grid-column: 1 / -1;
+  background: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px dashed #cbd5e1;
+}
+
+.item-label {
+  display: block;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.item-val {
+  display: block;
+  font-size: 0.8rem;
+  color: #1e293b;
+  line-height: 1.4;
+}
+
+.item-val.highlight {
+  color: #0f172a;
+}
+
+.file-badge {
+  background: #ffedd5;
+  color: #ea580c;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
 }
 
 .upload-zone {
