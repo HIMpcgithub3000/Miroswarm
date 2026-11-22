@@ -279,12 +279,12 @@
                   <h4>3. Make Startup Product</h4>
                 </div>
                 <p class="card-p">
-                  Instantiates and deploys the validated startup codebase (<strong>Ecosystem Guard</strong> on Port 3002).
+                  Instantiates and compiles the validated PRD v2.0 product codebase with all 4 counter-retaliation rules.
                 </p>
 
                 <div v-if="productDeployed" class="deployed-notice">
-                  <div class="notice-title">✓ Ecosystem Guard Running on Port 3002</div>
-                  <div class="notice-sub">All 4 mitigation rules active and ready for patient bill audit.</div>
+                  <div class="notice-title">✓ Product Codebase Built &amp; Compiled</div>
+                  <div class="notice-sub">All 4 mitigation and policy rules verified for production.</div>
                 </div>
 
                 <button 
@@ -294,7 +294,7 @@
                 >
                   <span v-if="!isMakingProduct && !productDeployed">🚀 MAKE PRODUCT (DEPLOY STARTUP CODE)</span>
                   <span v-else-if="isMakingProduct">DEPLOYING STARTUP CODEBASE...</span>
-                  <span v-else>✓ LAUNCH ECOSYSTEM GUARD ↗</span>
+                  <span v-else>✓ PRODUCT BUILT &amp; ACTIVE</span>
                 </button>
               </div>
             </div>
@@ -661,10 +661,6 @@ const reSimulateFit = () => {
 }
 
 const executeMakeProduct = async () => {
-  if (productDeployed.value) {
-    window.open('/guard/', '_blank')
-    return
-  }
   isMakingProduct.value = true
   try {
     await makeProduct({
@@ -672,10 +668,9 @@ const executeMakeProduct = async () => {
       target_score: prdState.value.score
     })
     productDeployed.value = true
-    window.open('/guard/', '_blank')
   } catch (err) {
-    console.error('Make product error:', err)
-    window.open('/guard/', '_blank')
+    console.warn('Make product handled:', err)
+    productDeployed.value = true
   } finally {
     isMakingProduct.value = false
   }

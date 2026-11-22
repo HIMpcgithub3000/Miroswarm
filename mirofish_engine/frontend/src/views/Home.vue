@@ -16,32 +16,12 @@
       </div>
 
       <div class="nav-links">
-        <a href="/guard/" target="_blank" class="nav-btn-highlight">
-          <span class="btn-icon">🛡️</span>
-          <span>Ecosystem Guard ↗</span>
-        </a>
-        <a href="/swarm-docs" target="_blank" class="nav-btn-secondary">
-          <span>Swarm API ↗</span>
-        </a>
         <a href="https://github.com/HIMpcgithub3000/Miroswarm" target="_blank" class="github-link">
           <span>GitHub</span>
           <span class="arrow">↗</span>
         </a>
       </div>
     </nav>
-
-    <!-- Downstream Retaliation Intelligence Banner -->
-    <div class="intelligence-banner">
-      <div class="banner-inner">
-        <div class="banner-badge">SIMULATION FINDING</div>
-        <div class="banner-text">
-          <strong>Empirical Discovery:</strong> Mandatory ₹4,000 room cap triggers an <strong>88.4% defiance probability</strong> with hospitals retaliating by inflating Operating Theater fees by <strong>+42.6%</strong>.
-        </div>
-        <a href="/guard/" target="_blank" class="banner-cta">
-          Inspect Ecosystem Guard Defense Engine →
-        </a>
-      </div>
-    </div>
 
     <div class="main-content">
       <!-- Upper Section: Hero Area -->

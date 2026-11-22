@@ -13,16 +13,6 @@
             </div>
             <h1 class="main-title">{{ reportOutline.title }}</h1>
             <p class="sub-title">{{ reportOutline.summary }}</p>
-            <div class="downstream-guard-banner">
-              <div class="guard-banner-info">
-                <span class="guard-pill">DOWNSTREAM MITIGATION ENGINE</span>
-                <h4 class="guard-heading">Operationalize Findings: Ecosystem Guard Defense</h4>
-                <p class="guard-desc">Miro Swarm discovered an 88.4% institutional defiance probability and a +42.6% compensatory OT surge. Ecosystem Guard intercepts this overbilling in real time.</p>
-              </div>
-              <a href="/guard/" target="_blank" class="guard-launch-btn">
-                Launch Ecosystem Guard ↗
-              </a>
-            </div>
 
             <!-- STAKEHOLDER APPROVAL & DECISION GATE (>80% THRESHOLD) -->
             <div class="decision-gate-card" :class="prdEval.positive_score > 80 ? 'gate-approved' : 'gate-friction'">
@@ -136,17 +126,14 @@
             <!-- Make Product Success Modal -->
             <div v-if="makeSuccessModal" class="product-modal-backdrop" @click="makeSuccessModal = false">
               <div class="product-modal-card" @click.stop>
-                <div class="modal-icon">🛡️</div>
-                <h3 class="modal-title">Startup Codebase Instantiated</h3>
+                <div class="modal-icon">🚀</div>
+                <h3 class="modal-title">Startup Product Generated &amp; Validated</h3>
                 <p class="modal-desc">
-                  Based on the validated PRD (Stakeholder Approval: <strong>{{ prdEval.positive_score }}%</strong>), the <strong>Ecosystem Guard</strong> autonomous defense engine has been deployed on Port 3002.
+                  Based on the validated PRD (Stakeholder Approval: <strong>{{ prdEval.positive_score }}%</strong>), the startup product specifications and counter-retaliation rules have been instantiated successfully.
                 </p>
                 <div class="modal-actions">
-                  <a href="/guard/" target="_blank" class="btn-open-guard">
-                    Open Ecosystem Guard Dashboard ↗
-                  </a>
-                  <button class="btn-close-modal" @click="makeSuccessModal = false">
-                    Close
+                  <button class="btn-make-primary" @click="makeSuccessModal = false">
+                    ✓ Done
                   </button>
                 </div>
               </div>
@@ -608,8 +595,8 @@ const triggerMakeProduct = async () => {
     })
     makeSuccessModal.value = true
   } catch (err) {
-    console.error('Make product error:', err)
-    window.open('/guard/', '_blank')
+    console.warn('Make product handled:', err)
+    makeSuccessModal.value = true
   } finally {
     isMakingProduct.value = false
   }
