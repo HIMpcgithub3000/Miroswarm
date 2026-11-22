@@ -177,6 +177,174 @@
                 </button>
               </div>
 
+              <!-- PRD Preparation Guidelines Accordion / Box -->
+              <div class="prd-guide-card">
+                <div class="guide-header" @click="toggleGuide">
+                  <div class="guide-header-title">
+                    <span class="guide-icon">📋</span>
+                    <span class="guide-main-text">PRD Document Guidelines (क्या होना चाहिए vs क्या नहीं होना चाहिए)</span>
+                    <span class="guide-badge">Input Spec</span>
+                  </div>
+                  <button type="button" class="guide-toggle-btn">
+                    {{ showGuide ? 'Hide Guide ▲' : 'Show Guide (नियम व दिशानिर्देश) ▼' }}
+                  </button>
+                </div>
+
+                <div v-show="showGuide" class="guide-body">
+                  <!-- Guide Tabs: Include vs Avoid vs Template -->
+                  <div class="guide-tabs">
+                    <button 
+                      type="button" 
+                      class="guide-tab" 
+                      :class="{ active: activeGuideTab === 'include' }"
+                      @click="activeGuideTab = 'include'"
+                    >
+                      <span class="tab-indicator green"></span>
+                      <span>🟢 What to Include (क्या होना चाहिए)</span>
+                    </button>
+                    <button 
+                      type="button" 
+                      class="guide-tab" 
+                      :class="{ active: activeGuideTab === 'avoid' }"
+                      @click="activeGuideTab = 'avoid'"
+                    >
+                      <span class="tab-indicator red"></span>
+                      <span>🔴 What to Avoid (क्या नहीं होना चाहिए)</span>
+                    </button>
+                    <button 
+                      type="button" 
+                      class="guide-tab" 
+                      :class="{ active: activeGuideTab === 'template' }"
+                      @click="activeGuideTab = 'template'"
+                    >
+                      <span class="tab-indicator cyan"></span>
+                      <span>📄 Canonical PRD Template (.md)</span>
+                    </button>
+                  </div>
+
+                  <!-- Tab 1: What to Include -->
+                  <div v-if="activeGuideTab === 'include'" class="guide-tab-pane">
+                    <div class="guide-grid">
+                      <div class="guide-rule-item">
+                        <div class="rule-num">01</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Multi-Party Opposing Stakeholders (बहुपक्षीय विरोधी हितधारक)</div>
+                          <div class="rule-desc">
+                            Define at least 3-4 distinct stakeholder groups with naturally conflicting economic incentives (e.g. Hospital CFOs, Patient Consumers, Insurance TPAs, Government Regulators). AI swarms require conflicting motives to simulate authentic pushback and debates.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item">
+                        <div class="rule-num">02</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Quantifiable Policies & Numeric Caps (सटीक दरें और संख्यात्मक सीमाएं)</div>
+                          <div class="rule-desc">
+                            Provide explicit numbers, percentages, or statutory caps (e.g. <code>₹4,000/day room tariff cap</code>, <code>15% maximum trade margin</code>, <code>30-day settlement SLA</code>). Quantitative boundaries allow the graph to evaluate mathematically.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item">
+                        <div class="rule-num">03</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Causal Retaliation Levers (टकराव और प्रतिरोध के रास्ते)</div>
+                          <div class="rule-desc">
+                            Specify what actions squeezed parties will take to circumvent constraints (e.g. <em>"If room rents are capped, private hospitals will inflate unregulated OT and consumable charges by +42%"</em>). This fuels GraphRAG causal relationships.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item">
+                        <div class="rule-num">04</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Designated Target Audience (लक्ष्य वर्ग for &gt;80% Gate)</div>
+                          <div class="rule-desc">
+                            Explicitly identify the primary target group whose satisfaction dictates the decision gate. If this group's simulated sentiment exceeds 80%, the system unlocks <strong>MAKE PRODUCT</strong>; otherwise, it requires <strong>REFINE</strong>.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item">
+                        <div class="rule-num">05</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Structured Markdown Format (सुव्यवस्थित मार्कडाउन संरचना)</div>
+                          <div class="rule-desc">
+                            Use standard markdown headings (<code>#</code>, <code>##</code>), bullet points, and concise sections. Keep total length optimal (1,000 to 3,000 words / 2–5 pages) for ultra-fast local Ollama CPU inference.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab 2: What to Avoid -->
+                  <div v-if="activeGuideTab === 'avoid'" class="guide-tab-pane">
+                    <div class="guide-grid">
+                      <div class="guide-rule-item avoid">
+                        <div class="rule-num red">01</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Empty Marketing Buzzwords (खोखले प्रचारक शब्द)</div>
+                          <div class="rule-desc">
+                            Avoid vague slogans like <em>"revolutionary AI paradigm shift"</em> or <em>"seamless ecosystem synergy"</em> without operational mechanisms. Without rules, agents cannot debate or vote meaningfully.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item avoid">
+                        <div class="rule-num red">02</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Giant Unstructured Dumps & Raw Logs (विशालकाय अनस्ट्रक्चर्ड डेटा या कोड)</div>
+                          <div class="rule-desc">
+                            Do not paste 50+ pages of unformatted logs, raw CSVs, or entire code repositories. Local Ollama LLM has finite context limits and processing raw blobs will cause token timeouts (>300s).
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item avoid">
+                        <div class="rule-num red">03</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Zero-Friction / Naive Harmony Assumptions (बिना विरोध की काल्पनिक स्थिति)</div>
+                          <div class="rule-desc">
+                            Never assume all actors will comply voluntarily without friction. If there is no incentive to resist, the simulation produces a superficial 100% positive result, masking real-world systemic risks.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item avoid">
+                        <div class="rule-num red">04</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Subjective & Undefined Terms (अस्पष्ट परिभाषाएं)</div>
+                          <div class="rule-desc">
+                            Avoid subjective phrases like <em>"fair and reasonable pricing"</em> or <em>"optimal user experience"</em> without defining baseline benchmark formulas or standard deviation limits.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="guide-rule-item avoid">
+                        <div class="rule-num red">05</div>
+                        <div class="rule-content">
+                          <div class="rule-title">Confidential Secrets & Sensitive PII (गोपनीय पासवर्ड या व्यक्तिगत डेटा)</div>
+                          <div class="rule-desc">
+                            Do not include production credentials, secret API tokens, or personally identifiable customer records in the input seed document.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab 3: Template -->
+                  <div v-if="activeGuideTab === 'template'" class="guide-tab-pane">
+                    <div class="template-header">
+                      <span>Copy or use this canonical template as your starting <code>.md</code> seed:</span>
+                      <button type="button" class="copy-btn" @click="copyTemplateText">
+                        {{ copySuccess ? '✓ Copied!' : 'Copy Template' }}
+                      </button>
+                    </div>
+                    <pre class="template-code"><code>{{ prdTemplateSample }}</code></pre>
+                  </div>
+                </div>
+              </div>
+
               <div
                 class="upload-zone"
                 :class="{ 'is-dragover': isDragOver, 'has-files': files.length > 0 }"
@@ -347,6 +515,52 @@ const demonstrationMeta = ref({
   target_audience: 'Patients, Corporate Hospital CFOs, Medical Specialists, Insurance TPAs',
   threshold: 80.0
 })
+
+// PRD Guidelines & Spec
+const showGuide = ref(true)
+const activeGuideTab = ref('include')
+const copySuccess = ref(false)
+
+const toggleGuide = () => {
+  showGuide.value = !showGuide.value
+}
+
+const prdTemplateSample = `# [Product / Policy Name] PRD & Simulation Seed
+
+## 1. Problem Statement & Baseline
+- Background: Current market friction, pricing inflation, or systemic failure.
+- Core Objective: The primary intervention (e.g. price regulation, platform margin restructuring).
+
+## 2. Multi-Party Stakeholders & Economic Incentives
+- **Primary Stakeholders (Opposing Motivations)**:
+  1. Service Providers / Platforms: Maximize revenue, EBITDA margin, and operational flexibility.
+  2. End Consumers / Beneficiaries: Minimize out-of-pocket expenses, eliminate hidden surcharges.
+  3. Intermediaries / Regulators: Enforce statutory compliance, transparency, and market stability.
+
+## 3. Quantitative Bounds & Statutory Rules
+- Statutory Rule 1: Specific tariff cap or pricing ceiling (e.g., max ₹4,000/day).
+- Statutory Rule 2: Capped trade margin (e.g., maximum 15% markup on consumables).
+- Statutory Rule 3: Mandatory dispute resolution within 7 business days with financial penalties.
+
+## 4. Retaliation Levers & Anticipated Friction Points
+- Provider Evasion Tactics: Unbundling fixed service packs into separate unregulated fees.
+- Anticipated Friction: If Rule 1 is enforced, providers inflate OT charges by +30% to +50%.
+
+## 5. Target Beneficiary & Decision Threshold
+- Designated Target Audience: End Consumer Patients
+- Evaluation Gate: > 80% positive simulated sentiment unlocks MAKE PRODUCT; <= 80% requires REFINE.`
+
+const copyTemplateText = async () => {
+  try {
+    await navigator.clipboard.writeText(prdTemplateSample)
+    copySuccess.value = true
+    setTimeout(() => {
+      copySuccess.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('Failed to copy template:', err)
+  }
+}
 
 const canSubmit = computed(() => {
   return formData.value.simulationRequirement.trim() !== '' && files.value.length > 0
@@ -1186,6 +1400,235 @@ const startSimulation = () => {
   border-color: #ff4500;
   color: #c2410c;
   box-shadow: 0 0 0 1px #ff4500;
+}
+
+/* PRD Document Guidelines Card */
+.prd-guide-card {
+  margin: 14px 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #f8fafc;
+  border-bottom: 1px solid #edf2f7;
+  cursor: pointer;
+  user-select: none;
+}
+
+.guide-header:hover {
+  background: #f1f5f9;
+}
+
+.guide-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-icon {
+  font-size: 1rem;
+}
+
+.guide-main-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.2px;
+}
+
+.guide-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: #e0e7ff;
+  color: #4338ca;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.guide-toggle-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.guide-toggle-btn:hover {
+  border-color: #ff4500;
+  color: #ff4500;
+}
+
+.guide-body {
+  padding: 14px 16px;
+}
+
+.guide-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.guide-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.guide-tab:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.guide-tab.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+.tab-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.tab-indicator.green {
+  background: #10b981;
+}
+
+.tab-indicator.red {
+  background: #ef4444;
+}
+
+.tab-indicator.cyan {
+  background: #06b6d4;
+}
+
+.guide-tab-pane {
+  animation: fadeIn 0.2s ease;
+}
+
+.guide-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-rule-item {
+  display: flex;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-left: 3px solid #10b981;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.guide-rule-item.avoid {
+  border-left-color: #ef4444;
+}
+
+.rule-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #10b981;
+  min-width: 20px;
+}
+
+.rule-num.red {
+  color: #ef4444;
+}
+
+.rule-content {
+  flex: 1;
+}
+
+.rule-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 3px;
+}
+
+.rule-desc {
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.rule-desc code {
+  background: #e2e8f0;
+  color: #0f172a;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.copy-btn {
+  background: #ff4500;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background: #e03e00;
+}
+
+.template-code {
+  background: #0d1117;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  max-height: 240px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  margin: 0;
 }
 
 /* Parsed Demonstration Meta Card */

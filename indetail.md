@@ -22,6 +22,11 @@
 6. [Complete System Trace: MiroFish vs Miro Swarm vs Ecosystem Guard](#6-complete-system-trace-mirofish-vs-miro-swarm-vs-ecosystem-guard)
 7. [Production Deployment, PM2 & Nginx Architecture](#7-production-deployment-pm2--nginx-architecture)
 8. [API Contracts & Database Schemas](#8-api-contracts--database-schemas)
+9. [Seed PRD Document Specification: Input Guidelines & Domain Rules](#9-seed-prd-document-specification-input-guidelines--domain-rules)
+   - [9.1 What MUST Be Included (क्या होना चाहिए)](#91-what-must-be-included-क्या-होना-चाहिए)
+   - [9.2 What MUST NOT Be Included (क्या नहीं होना चाहिए)](#92-what-must-not-be-included-क्या-नहीं-होना-चाहिए)
+   - [9.3 Mathematical Rationale for Multi-Agent Swarms](#93-mathematical-rationale-for-multi-agent-swarms)
+   - [9.4 Canonical PRD Markdown Template (.md)](#94-canonical-prd-markdown-template-md)
 
 ---
 
@@ -416,6 +421,113 @@ CREATE TABLE IF NOT EXISTS simulation_runs (
 7. `POST /api/worlds/fork`: Creates cryptographically isolated parallel simulation world.
 8. `POST /guard/api/audit-bill`: Ingests and audits hospital bills for retaliation surges.
 9. `POST /guard/api/counter-playbook`: Generates legal dispute letters under Consumer Protection Act 2019.
+
+---
+
+## 9. Seed PRD Document Specification: Input Guidelines & Domain Rules
+
+Before Miro Swarm can extract the Digital Twin Knowledge Graph (GraphRAG) and launch the multi-agent debate swarm, the input idea document (`.md`, `.txt`, or `.pdf`) must satisfy specific quality criteria. A poorly formed PRD leads to token timeouts, trivial frictionless consensus, or ungrounded hallucinations.
+
+```mermaid
+flowchart LR
+    subgraph IN["Input Document (.md)"]
+        direction TB
+        REQ["Multi-Party Stakeholders\nQuantifiable Caps & Rules\nRetaliation Levers\nDesignated Target (80%)"]
+    end
+    subgraph ST1["Step 1: GraphRAG Extraction"]
+        ONT["Ontology Generator (Local Qwen2.5)"]
+        GRAPH["Causal Nodes & Directional Edges"]
+    end
+    subgraph ST3["Step 3: Multi-Agent Swarm"]
+        DEBATE["Debate, Retaliate & Vote"]
+    end
+    subgraph ST4["Step 4: Decision Gate"]
+        GATE{Approval > 80%?}
+        MAKE["MAKE PRODUCT (Build)"]
+        REFINE["REFINE INITIAL PLAN"]
+    end
+
+    IN --> ST1 --> ST3 --> ST4
+    GATE -- Yes --> MAKE
+    GATE -- No --> REFINE
+```
+
+### 9.1 What MUST Be Included (क्या होना चाहिए)
+
+1. **Multi-Party Opposing Stakeholders (बहुपक्षीय विरोधी हितधारक)**:
+   - Must define at least 3 to 4 distinct ecosystem actors with competing financial and operational utility functions (e.g. *Hospital CFOs*, *Patient Consumers*, *Insurance TPAs*, *NPPA/MOHFW Regulators*).
+   - If all parties share identical objectives, no adversarial tension exists, making multi-agent debate mathematically trivial.
+2. **Quantifiable Policies, Numeric Caps & Constraints (सटीक दरें और संख्यात्मक सीमाएं)**:
+   - Must state concrete figures, tariffs, percentages, or statutory deadlines (e.g., `₹4,000/day max room rent`, `15% trade margin on medical devices`, `30-day claims turnaround SLA`).
+   - Numerical bounds are strictly required for the causal DAG $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ to compute quantitative deltas.
+3. **Causal Retaliation Levers & Loophole Surfaces (टकराव और प्रतिरोध के रास्ते)**:
+   - Must specify how constrained parties will react to margin compression (e.g., *“If room rent is capped at ₹4,000, hospitals will unbundle OT surgical consumables and inflate pack charges by +42%”*).
+   - This provides the ground truth for directional edges like `INFLATES`, `RETALIATES_AGAINST`, and `DISPUTES`.
+4. **Designated Target Audience for the 80% Decision Gate (लक्ष्य वर्ग)**:
+   - Must explicitly designate the primary beneficiary group whose approval score is benchmarked against the **80% threshold** in Step 4.
+   - If Simulated Positive Sentiment $> 80\%$, the system unlocks automated code generation (**MAKE PRODUCT**); if $\le 80\%$, it triggers local LLM re-negotiation (**REFINE INITIAL PLAN**).
+5. **Structured Markdown Hierarchy & Optimal Length (सुव्यवस्थित संरचना)**:
+   - Use clean Markdown syntax (`#`, `##`, `###`, tables, bullet lists).
+   - Optimal length: **1,000 to 3,000 words (2 to 5 pages)**. This fits comfortably inside local CPU Ollama context without exceeding token processing limits.
+
+---
+
+### 9.2 What MUST NOT Be Included (क्या नहीं होना चाहिए)
+
+1. **Empty Marketing Fluff & Vague Buzzwords (खोखले प्रचारक शब्द)**:
+   - Avoid generic buzzwords (e.g., *"revolutionary AI synergy"*, *"world-class disruptive platform"*, *"empowering win-win ecosystem"*).
+   - Fluff lacks causal mechanics; agents cannot parse or debate non-operational adjectives.
+2. **Giant Unstructured Dumps & Raw Logs (विशालकाय अनस्ट्रक्चर्ड डेटा या कोड)**:
+   - Do NOT paste 50+ pages of raw server logs, unformatted CSV dumps, or full code repositories.
+   - Local Ollama CPU execution has finite token processing speeds. Unstructured noise will cause frontend request timeouts (`timeout of 300000ms exceeded`).
+3. **Zero-Friction / Naive Harmony Assumptions (बिना विरोध की काल्पनिक स्थिति)**:
+   - Do NOT assume all participants will happily comply with new rules without friction or resistance.
+   - Without friction, the simulation yields an artificial 100% positive score, blinding founders to lethal regulatory or market blowbacks.
+4. **Subjective & Undefined Concepts (अस्पष्ट परिभाषाएं)**:
+   - Avoid undefined terms like *"fair prices"*, *"reasonable margins"*, or *"good quality"* without specifying the exact formula or statutory reference.
+5. **Confidential Credentials or Sensitive PII (गोपनीय पासवर्ड या व्यक्तिगत डेटा)**:
+   - Never include production database passwords, private API tokens, or actual personal patient/customer identities.
+
+---
+
+### 9.3 Mathematical Rationale for Multi-Agent Swarms
+
+In Miro Swarm, agent $i$ updates its stance $S_i(t) \in [-1, +1]$ at each simulation round $t$ according to its utility differential:
+$$\Delta U_i(t) = U_i(\text{Policy}) - U_i(\text{Baseline})$$
+When a PRD contains quantifiable caps, agent $i$ computes its payoff directly:
+$$\text{If } \Delta U_i(t) < 0 \implies \text{Retaliate via unmonitored channel } k \text{ with probability } P(\text{Defiance}) = \sigma(-\beta \Delta U_i)$$
+If the input document lacks numerical caps or explicit stakeholder incentives, $\Delta U_i(t)$ cannot be evaluated, reducing the simulation to random token generation.
+
+---
+
+### 9.4 Canonical PRD Markdown Template (.md)
+
+```markdown
+# [Product / Policy Name] PRD & Simulation Seed
+
+## 1. Problem Statement & Baseline
+- Background: Current market friction, pricing inflation, or systemic failure.
+- Core Objective: The primary intervention (e.g. price regulation, platform margin restructuring).
+
+## 2. Multi-Party Stakeholders & Economic Incentives
+- **Primary Stakeholders (Opposing Motivations)**:
+  1. Service Providers / Platforms: Maximize revenue, EBITDA margin, and operational flexibility.
+  2. End Consumers / Beneficiaries: Minimize out-of-pocket expenses, eliminate hidden surcharges.
+  3. Intermediaries / Regulators: Enforce statutory compliance, transparency, and market stability.
+
+## 3. Quantitative Bounds & Statutory Rules
+- Statutory Rule 1: Specific tariff cap or pricing ceiling (e.g., max ₹4,000/day).
+- Statutory Rule 2: Capped trade margin (e.g., maximum 15% markup on consumables).
+- Statutory Rule 3: Mandatory dispute resolution within 7 business days with financial penalties.
+
+## 4. Retaliation Levers & Anticipated Friction Points
+- Provider Evasion Tactics: Unbundling fixed service packs into separate unregulated fees.
+- Anticipated Friction: If Rule 1 is enforced, providers inflate OT charges by +30% to +50%.
+
+## 5. Target Beneficiary & Decision Threshold
+- Designated Target Audience: End Consumer Patients
+- Evaluation Gate: > 80% positive simulated sentiment unlocks MAKE PRODUCT; <= 80% requires REFINE.
+```
 
 ---
 
