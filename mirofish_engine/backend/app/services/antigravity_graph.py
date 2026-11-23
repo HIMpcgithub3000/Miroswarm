@@ -82,11 +82,12 @@ class LocalEdge:
 
 class LocalEpisode:
     """Zep-compatible Episode record."""
-    def __init__(self, uuid_val: str, content: str, source: str = "text"):
+    def __init__(self, uuid_val: str, content: str, source: str = "text", processed: bool = True):
         self.uuid = uuid_val
         self.uuid_ = uuid_val
         self.content = content
         self.source = source
+        self.processed = processed
         self.created_at = datetime.now().isoformat()
 
     def to_dict(self):
@@ -94,6 +95,7 @@ class LocalEpisode:
             "uuid": self.uuid,
             "content": self.content,
             "source": self.source,
+            "processed": self.processed,
             "created_at": self.created_at
         }
 
@@ -187,10 +189,13 @@ class EpisodeAccessor:
     def __init__(self, storage):
         self.storage = storage
 
+    def get(self, uuid_: str = "", **kwargs):
+        return LocalEpisode(uuid_val=uuid_, content="", source="text", processed=True)
+
     def get_by_graph(self, graph_id: str):
         graph = self.storage.load_graph(graph_id)
         return [
-            LocalEpisode(uuid_val=ep["uuid"], content=ep.get("content", ""))
+            LocalEpisode(uuid_val=ep["uuid"], content=ep.get("content", ""), processed=True)
             for ep in graph.get("episodes", [])
         ]
 
@@ -245,49 +250,128 @@ class GraphService:
         return self.storage.search_edges(graph_id, query, limit)
 
 
+class BatchItemDetail:
+    """Detail of an item processed within a batch."""
+    def __init__(self, batch_id: str, sequence_index: int, episode_uuid: str, graph_id: str = ""):
+        self.uuid = episode_uuid
+        self.uuid_ = episode_uuid
+        self.episode_uuid = episode_uuid
+        self.source_uuid = episode_uuid
+        self.batch_id = batch_id
+        self.sequence_index = sequence_index
+        self.status = "succeeded"
+        self.graph_id = graph_id
+        self.created_at = datetime.now().isoformat()
+
+
+class BatchProgress:
+    """Progress statistics for a batch."""
+    def __init__(self, total: int = 0):
+        self.percent_complete = 100
+        self.succeeded_items = total
+        self.failed_items = 0
+        self.total_items = total
+
+
+class BatchRecord:
+    """Batch container record."""
+    def __init__(self, batch_id: str, metadata: Optional[Dict[str, Any]] = None):
+        self.uuid = batch_id
+        self.batch_id = batch_id
+        self.status = "draft"
+        self.metadata = metadata or {}
+        self.items: List[BatchItemDetail] = []
+        self.created_at = datetime.now().isoformat()
+
+    @property
+    def progress(self):
+        return BatchProgress(len(self.items))
+
+
+class BatchItemsPage:
+    """Paginated list of batch items."""
+    def __init__(self, items: List[BatchItemDetail]):
+        self.items = items
+        self.next_cursor = None
+
+
 class BatchService:
-    """Service providing client.batch operations."""
+    """Service providing client.batch operations fully conforming to Zep Cloud Batch API."""
     def __init__(self, storage):
         self.storage = storage
+        self._batches: Dict[str, BatchRecord] = {}
 
-    def add(self, graph_id: str, items: List[Any], **kwargs):
+    def create(self, metadata: Optional[Dict[str, Any]] = None, **kwargs) -> BatchRecord:
         batch_id = f"batch_{uuid.uuid4().hex[:12]}"
+        record = BatchRecord(batch_id=batch_id, metadata=metadata)
+        self._batches[batch_id] = record
+        return record
+
+    def add(self, batch_id: str, items: List[Any], **kwargs) -> List[BatchItemDetail]:
+        record = self._batches.get(batch_id)
+        if not record:
+            record = BatchRecord(batch_id=batch_id)
+            self._batches[batch_id] = record
+
+        start_index = len(record.items)
         extracted_texts = []
-        for it in items:
+        added_details = []
+        graph_id = record.metadata.get("graph_id", "")
+
+        for offset, it in enumerate(items):
             text = getattr(it, "data", "") or getattr(it, "content", "")
             if isinstance(it, dict):
                 text = it.get("data") or it.get("content") or ""
+            if not graph_id:
+                graph_id = getattr(it, "graph_id", "") or (it.get("graph_id") if isinstance(it, dict) else "")
+
+            ep_uuid = f"ep_{uuid.uuid4().hex[:12]}"
             if text:
                 extracted_texts.append(str(text))
-        
-        # Ingest text into graph
-        full_text = "\n\n".join(extracted_texts)
-        self.storage.extract_and_add(graph_id, full_text)
 
-        class BatchObj:
-            def __init__(self, bid, gid):
-                self.uuid = bid
-                self.batch_id = bid
-                self.status = "COMPLETED"
-                self.metadata = {
-                    "graph_id": gid,
-                    "mirofish_operation_id": kwargs.get("operation_id", "")
-                }
-        return BatchObj(batch_id, graph_id)
+            detail = BatchItemDetail(
+                batch_id=batch_id,
+                sequence_index=start_index + offset,
+                episode_uuid=ep_uuid,
+                graph_id=graph_id,
+            )
+            record.items.append(detail)
+            added_details.append(detail)
 
-    def get(self, batch_id: str):
-        class BatchStatusObj:
-            def __init__(self):
-                self.status = "COMPLETED"
-                self.progress = 100
-        return BatchStatusObj()
+        # Ingest text into local graph storage
+        if extracted_texts and graph_id:
+            full_text = "\n\n".join(extracted_texts)
+            self.storage.extract_and_add(graph_id, full_text)
 
-    def list(self, limit: int = 100, cursor: Optional[int] = None):
+        return added_details
+
+    def process(self, batch_id: str, **kwargs):
+        record = self._batches.get(batch_id)
+        if record:
+            record.status = "succeeded"
+        return {"status": "succeeded"}
+
+    def get(self, batch_id: str, **kwargs) -> BatchRecord:
+        record = self._batches.get(batch_id)
+        if not record:
+            record = BatchRecord(batch_id=batch_id)
+            record.status = "succeeded"
+            self._batches[batch_id] = record
+        else:
+            record.status = "succeeded"
+        return record
+
+    def list_items(self, batch_id: str, limit: int = 100, cursor: Optional[int] = None, **kwargs) -> BatchItemsPage:
+        record = self._batches.get(batch_id)
+        items = record.items if record else []
+        return BatchItemsPage(items=items)
+
+    def list(self, limit: int = 100, cursor: Optional[int] = None, **kwargs):
         class BatchListObj:
-            def __init__(self):
-                self.batches = []
+            def __init__(self, batches):
+                self.batches = list(batches.values())
                 self.next_cursor = None
-        return BatchListObj()
+        return BatchListObj(self._batches)
 
 
 class LocalGraphStorage:
