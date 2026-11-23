@@ -652,6 +652,40 @@ Running Healthdoor's regulatory mandate through Miro Swarm's 120-round simulatio
 - **Refinement Intervention**: The local AI inserted Section 4.3 ("Compensatory OT Pack Ceiling & Mandatory Itemized Audit").
 - **Final Run**: Target approval surged to **84.2%**, successfully clearing the >80% gate and unlocking automated production of the counter-retaliation platform.
 
+------
+
+## 13. Pure English Localization & Multi-Agent Persona Standardization
+
+### 13.1 Context & Architecture Challenge
+In Miro Swarm, simulation preparation (Zep entity ingestion, persona generation, dual-platform config generation, and report generation) executes in asynchronous background worker threads (`ThreadPoolExecutor` and Python threading).
+While the frontend interface was pinned to English (`en`), background threads detached from incoming HTTP request contexts previously defaulted to Chinese (`'zh'`) in `locale.py`. This caused three distinct downstream issues:
+1. `get_language_instruction()` returned `请使用中文回答。`, forcing local LLMs (Ollama `qwen2.5:1.5b-instruct`) to generate Chinese bios, personas, and interested topics.
+2. `oasis_profile_generator.py` contained hardcoded Chinese system prompts, instructions (`country: 国家（使用中文，如"中国"）`), and progress messages (`已完成 {current}/{total}`).
+3. Tags (e.g. `医疗健康机构`) and topic pills (e.g. `医疗创新`, `患者关怀`) populated in Chinese across Step 2 agent modals and dashboard logs.
+
+### 13.2 Systemic English Standardization
+To enforce 100% English generation by default across the entire multi-agent simulation pipeline, the following layers were standardized:
+
+1. **Locale & Language Instruction Fallback (`locale.py`)**:
+   - `get_locale()` strictly defaults to `'en'` in non-request contexts and background threads.
+   - `t()` translation lookup falls back directly to `'en'`.
+   - `get_language_instruction()` returns `'Please respond in English.'`.
+
+2. **Agent Persona & Social Profile Engine (`oasis_profile_generator.py`)**:
+   - `COUNTRIES`: Standardized to English (`["India", "United States", "United Kingdom", "Singapore", "Germany", "France", "Canada", "Australia", "Brazil", "Japan", "South Korea"]`).
+   - `_get_system_prompt()`: Configured with strict English JSON output instructions.
+   - `_build_individual_persona_prompt()` & `_build_group_persona_prompt()`: Re-architected in English, enforcing English professions, bios, personas, and topic lists.
+   - Progress Callback: Updated to `Completed {current}/{total}: {entity.name} ({entity_type})`.
+
+3. **Ontology Generator (`ontology_generator.py`)**:
+   - `ONTOLOGY_SYSTEM_PROMPT` & `_build_user_message()`: Fully translated to English, ensuring the 10 entity types, relationship types, and `analysis_summary` are structured in English.
+
+4. **Simulation Config Generator (`simulation_config_generator.py`)**:
+   - Time config, event seeding, and agent activity modeling prompts converted to English, ensuring `hot_topics`, initial seed posts, and `reasoning` are 100% English.
+
+5. **Investigation Tools & Report Generator (`zep_tools.py` & `report_agent.py`)**:
+   - Query decomposition, agent interview curation, and multi-angle report section authoring templates translated to English, maintaining high analytical density and evidence-based blockquotes.
+
 ---
 
 *End of In-Detail Technical Specification.*
