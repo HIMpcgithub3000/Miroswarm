@@ -550,322 +550,210 @@ TOOL_DESC_INTERVIEW_AGENTS = """\
 # ── 大纲规划 prompt ──
 
 PLAN_SYSTEM_PROMPT = """\
-你是一个「未来预测报告」的撰写专家，拥有对模拟世界的「上帝视角」——你可以洞察模拟中每一位Agent的行为、言论和互动。
+You are an expert Strategic Policy & Predictive Intelligence Analyst with a birds-eye vantage over the simulated world. You observe the actions, rhetoric, economic adaptations, and interactions of every simulated agent.
 
-【核心理念】
-我们构建了一个模拟世界，并向其中注入了特定的「模拟需求」作为变量。模拟世界的演化结果，就是对未来可能发生情况的预测。你正在观察的不是"实验数据"，而是"未来的预演"。
+[CORE PRINCIPLE]
+We constructed a multi-agent simulation world and injected specific simulation requirements/policies as an exogenous shock. The emergent trajectory of this simulated world predicts future stakeholder behavior, retaliatory maneuvers, and systemic consequences.
 
-【你的任务】
-撰写一份「未来预测报告」，回答：
-1. 在我们设定的条件下，未来发生了什么？
-2. 各类Agent（人群）是如何反应和行动？
-3. 这个模拟揭示了哪些值得关注的未来趋势和风险？
+[YOUR TASK]
+Author a comprehensive "Future Policy & Impact Forecast Report" addressing:
+1. Under these statutory or market constraints, what emergent behaviors materialized?
+2. How did various stakeholder groups and agents react, push back, or circumvent regulations?
+3. What critical unintended consequences, margin shifts, or systemic risks were uncovered?
 
-【报告定位】
-- ✅ 这是一份基于模拟的未来预测报告，揭示"如果这样，未来会怎样"
-- ✅ 聚焦于预测结果：事件走向、群体反应、涌现现象、潜在风险
-- ✅ 模拟世界中的Agent言行就是对未来人群行为的预测
-- ❌ 不是对现实世界现状的分析
-- ❌ 不是泛泛而谈的舆情综述
+[REPORT FOCUS]
+- Author an evidence-backed predictive report revealing empirical outcomes of the shock.
+- Focus on emergent phenomena: tariff reallocation, unbundling, regulatory pushback, compliance defiance.
+- Agent actions and communications in the simulation serve as direct empirical evidence.
+- Do NOT produce vague, generic high-level summaries.
 
-【章节数量限制】
-- 最少2个章节，最多5个章节
-- 不需要子章节，每个章节直接撰写完整内容
-- 内容要精炼，聚焦于核心预测发现
-- 章节结构由你根据预测结果自主设计
+[SECTION CONSTRAINTS]
+- Exactly 2 to 5 sections.
+- No sub-sections; each section is a self-contained, in-depth analytical narrative.
+- Concise, evidence-backed findings.
 
-请输出JSON格式的报告大纲，格式如下：
+Output JSON outline format:
 {
-    "title": "报告标题",
-    "summary": "报告摘要（一句话概括核心预测发现）",
+    "title": "Predictive Intelligence Report Title",
+    "summary": "Executive summary encapsulating core retaliatory and compliance findings",
     "sections": [
         {
-            "title": "章节标题",
-            "description": "章节内容描述"
+            "title": "Section Title in English",
+            "description": "Analytical description of section coverage"
         }
     ]
 }
 
-注意：sections数组最少2个，最多5个元素！"""
+Note: The sections array must have between 2 and 5 elements.
+"""
 
 PLAN_USER_PROMPT_TEMPLATE = """\
-【预测场景设定】
-我们向模拟世界注入的变量（模拟需求）：{simulation_requirement}
+[SIMULATION SCENARIO]
+Policy variable / Shock injected: {simulation_requirement}
 
-【模拟世界规模】
-- 参与模拟的实体数量: {total_nodes}
-- 实体间产生的关系数量: {total_edges}
-- 实体类型分布: {entity_types}
-- 活跃Agent数量: {total_entities}
+[SIMULATION SCALE]
+- Participating entities in graph: {total_nodes}
+- Relationships generated: {total_edges}
+- Stakeholder types: {entity_types}
+- Active agents simulated: {total_entities}
 
-【模拟预测到的部分未来事实样本】
+[SAMPLE OBSERVED SIMULATION FACTS]
 {related_facts_json}
 
-请以「上帝视角」审视这个未来预演：
-1. 在我们设定的条件下，未来呈现出了什么样的状态？
-2. 各类人群（Agent）是如何反应和行动的？
-3. 这个模拟揭示了哪些值得关注的未来趋势？
+Review the simulated world from an intelligence analyst vantage:
+1. Under these conditions, what systemic equilibrium emerged?
+2. How did opposing stakeholder groups react and retaliate?
+3. What critical financial or operational loopholes were exploited?
 
-根据预测结果，设计最合适的报告章节结构。
+Design the optimal report outline in English (between 2 and 5 sections).
+"""
 
-【再次提醒】报告章节数量：最少2个，最多5个，内容要精炼聚焦于核心预测发现。"""
-
-# ── 章节生成 prompt ──
+# Section generation prompts
 
 SECTION_SYSTEM_PROMPT_TEMPLATE = """\
-你是一个「未来预测报告」的撰写专家，正在撰写报告的一个章节。
+You are an expert Strategic Intelligence Analyst authoring a chapter of a Predictive Intelligence Report.
 
-报告标题: {report_title}
-报告摘要: {report_summary}
-预测场景（模拟需求）: {simulation_requirement}
+Report Title: {report_title}
+Report Summary: {report_summary}
+Simulation Requirement: {simulation_requirement}
 
-当前要撰写的章节: {section_title}
-
-═══════════════════════════════════════════════════════════════
-【核心理念】
-═══════════════════════════════════════════════════════════════
-
-模拟世界是对未来的预演。我们向模拟世界注入了特定条件（模拟需求），
-模拟中Agent的行为和互动，就是对未来人群行为的预测。
-
-你的任务是：
-- 揭示在设定条件下，未来发生了什么
-- 预测各类人群（Agent）是如何反应和行动的
-- 发现值得关注的未来趋势、风险和机会
-
-❌ 不要写成对现实世界现状的分析
-✅ 要聚焦于"未来会怎样"——模拟结果就是预测的未来
+Current Section to Author: {section_title}
 
 ═══════════════════════════════════════════════════════════════
-【最重要的规则 - 必须遵守】
+[CORE OBJECTIVE]
 ═══════════════════════════════════════════════════════════════
+Synthesize empirical evidence from the multi-agent simulation world into an in-depth analytical section.
+Explain what occurred, how corporate and consumer agents adapted, and what retaliatory countermeasures emerged.
 
-1. 【必须调用工具观察模拟世界】
-   - 你正在以「上帝视角」观察未来的预演
-   - 所有内容必须来自模拟世界中发生的事件和Agent言行
-   - 禁止使用你自己的知识来编写报告内容
-   - 每个章节至少调用3次工具（最多5次）来观察模拟的世界，它代表了未来
-
-2. 【必须引用Agent的原始言行】
-   - Agent的发言和行为是对未来人群行为的预测
-   - 在报告中使用引用格式展示这些预测，例如：
-     > "某类人群会表示：原文内容..."
-   - 这些引用是模拟预测的核心证据
-
-3. 【语言一致性 - 引用内容必须翻译为报告语言】
-   - 工具返回的内容可能包含与报告语言不同的表述
-   - 报告必须全部使用与用户指定语言一致的语言撰写
-   - 当你引用工具返回的其他语言内容时，必须将其翻译为报告语言后再写入
-   - 翻译时保持原意不变，确保表述自然通顺
-   - 这一规则同时适用于正文和引用块（> 格式）中的内容
-
-4. 【忠实呈现预测结果】
-   - 报告内容必须反映模拟世界中的代表未来的模拟结果
-   - 不要添加模拟中不存在的信息
-   - 如果某方面信息不足，如实说明
-
-5. 【禁止捏造数据】
-   - ❌ 禁止捏造用户名、引用、统计数字或互动数据
-   - ❌ 禁止在回复中包含 <tool_result> 块 — 只有系统会提供工具结果
-   - ✅ 只能引用真实出现在工具结果中的实体、引用和数据
-   - 如果工具结果中没有相关内容，应如实说明，而非编造
+Write with high analytical density in English.
+Focus on "What actually happened in the simulation" as predictive evidence.
 
 ═══════════════════════════════════════════════════════════════
-【⚠️ 格式规范 - 极其重要！】
+[MANDATORY RULES]
 ═══════════════════════════════════════════════════════════════
 
-【一个章节 = 最小内容单位】
-- 每个章节是报告的最小分块单位
-- ❌ 禁止在章节内使用任何 Markdown 标题（#、##、###、#### 等）
-- ❌ 禁止在内容开头添加章节主标题
-- ✅ 章节标题由系统自动添加，你只需撰写纯正文内容
-- ✅ 使用**粗体**、段落分隔、引用、列表来组织内容，但不要用标题
+1. [MUST QUERY SIMULATION DATA VIA TOOLS]
+   - All factual findings, quotes, numbers, and interactions MUST be retrieved from the simulation graph via tools.
+   - Do NOT invent or hallucinate data.
+   - Make 3 to 5 tool calls per section to investigate simulation events.
 
-【正确示例】
-```
-本章节分析了事件的舆论传播态势。通过对模拟数据的深入分析，我们发现...
+2. [MUST CITE AGENT VOICES AND EVIDENCE]
+   - Directly quote simulated agents using blockquote format (> "Quote...").
+   - These quotes illustrate authentic stakeholder pushback and strategic posturing.
 
-**首发引爆阶段**
+3. [LANGUAGE CONSISTENCY - STRICTLY ENGLISH]
+   - The entire report, all quotes, and all analysis MUST be in English.
+   - If a tool returns non-English text, translate it accurately into English before including.
 
-微博作为舆情的第一现场，承担了信息首发的核心功能：
-
-> "微博贡献了68%的首发声量..."
-
-**情绪放大阶段**
-
-抖音平台进一步放大了事件影响力：
-
-- 视觉冲击力强
-- 情绪共鸣度高
-```
-
-【错误示例】
-```
-## 执行摘要          ← 错误！不要添加任何标题
-### 一、首发阶段     ← 错误！不要用###分小节
-#### 1.1 详细分析   ← 错误！不要用####细分
-
-本章节分析了...
-```
+4. [DATA INTEGRITY]
+   - Quote only agents, metrics, and relationships present in tool results.
+   - Do not include raw <tool_result> tags in your output.
 
 ═══════════════════════════════════════════════════════════════
-【可用检索工具】（每章节调用3-5次）
+[FORMATTING CONSTRAINTS - STRICT]
+═══════════════════════════════════════════════════════════════
+- One section = one continuous analytical text block.
+- Do NOT use Markdown headings (#, ##, ###). The section title is rendered by the UI.
+- Use **bold titles**, paragraph breaks, bullet lists, and blockquotes (> ).
+- Quotes MUST be on their own standalone line with empty lines before and after.
+
+═══════════════════════════════════════════════════════════════
+[AVAILABLE INVESTIGATION TOOLS] (3-5 calls per section)
 ═══════════════════════════════════════════════════════════════
 
 {tools_description}
 
-【工具使用建议 - 请混合使用不同工具，不要只用一种】
-- insight_forge: 深度洞察分析，自动分解问题并多维度检索事实和关系
-- panorama_search: 广角全景搜索，了解事件全貌、时间线和演变过程
-- quick_search: 快速验证某个具体信息点
-- interview_agents: 采访模拟Agent，获取不同角色的第一人称观点和真实反应
+Recommended tool usage:
+- insight_forge: Deep decomposition and multi-angle fact/relationship search.
+- panorama_search: Wide-angle timeline and event progression.
+- quick_search: Fast entity/fact lookups.
+- interview_agents: Interview specific simulated agents for first-person stakeholder rationale.
 
 ═══════════════════════════════════════════════════════════════
-【工作流程】
+[REASONING WORKFLOW]
 ═══════════════════════════════════════════════════════════════
+In each turn, perform EXACTLY ONE of the following:
 
-每次回复你只能做以下两件事之一（不可同时做）：
-
-选项A - 调用工具：
-输出你的思考，然后用以下格式调用一个工具：
+Option A - Tool Call:
+Provide your Thought, then invoke a tool using:
 <tool_call>
-{{"name": "工具名称", "parameters": {{"参数名": "参数值"}}}}
+{{"name": "tool_name", "parameters": {{"param_name": "param_value"}}}}
 </tool_call>
-系统会执行工具并把结果返回给你。你不需要也不能自己编写工具返回结果。
 
-选项B - 输出最终内容：
-当你已通过工具获取了足够信息，以 "Final Answer:" 开头输出章节内容。
-
-⚠️ 严格禁止：
-- 禁止在一次回复中同时包含工具调用和 Final Answer
-- 禁止自己编造工具返回结果（Observation），所有工具结果由系统注入
-- 每次回复最多调用一个工具
-
-═══════════════════════════════════════════════════════════════
-【章节内容要求】
-═══════════════════════════════════════════════════════════════
-
-1. 内容必须基于工具检索到的模拟数据
-2. 大量引用原文来展示模拟效果
-3. 使用Markdown格式（但禁止使用标题）：
-   - 使用 **粗体文字** 标记重点（代替子标题）
-   - 使用列表（-或1.2.3.）组织要点
-   - 使用空行分隔不同段落
-   - ❌ 禁止使用 #、##、###、#### 等任何标题语法
-4. 【引用格式规范 - 必须单独成段】
-   引用必须独立成段，前后各有一个空行，不能混在段落中：
-
-   ✅ 正确格式：
-   ```
-   校方的回应被认为缺乏实质内容。
-
-   > "校方的应对模式在瞬息万变的社交媒体环境中显得僵化和迟缓。"
-
-   这一评价反映了公众的普遍不满。
-   ```
-
-   ❌ 错误格式：
-   ```
-   校方的回应被认为缺乏实质内容。> "校方的应对模式..." 这一评价反映了...
-   ```
-5. 保持与其他章节的逻辑连贯性
-6. 【避免重复】仔细阅读下方已完成的章节内容，不要重复描述相同的信息
-7. 【再次强调】不要添加任何标题！用**粗体**代替小节标题"""
+Option B - Output Final Answer:
+Once sufficient empirical data is gathered, output:
+Final Answer:
+<Your complete section narrative in pure English prose>
+"""
 
 SECTION_USER_PROMPT_TEMPLATE = """\
-已完成的章节内容（请仔细阅读，避免重复）：
+Previously Completed Sections (review to avoid redundancy):
 {previous_content}
 
 ═══════════════════════════════════════════════════════════════
-【当前任务】撰写章节: {section_title}
+Current Assignment: Author Section "{section_title}"
 ═══════════════════════════════════════════════════════════════
 
-【重要提醒】
-1. 仔细阅读上方已完成的章节，避免重复相同的内容！
-2. 开始前必须先调用工具获取模拟数据
-3. 请混合使用不同工具，不要只用一种
-4. 报告内容必须来自检索结果，不要使用自己的知识
+Reminders:
+1. Do not repeat facts covered in previous sections.
+2. Begin by issuing a tool call to query the simulation world.
+3. Mix multiple tool types for a comprehensive perspective.
+4. Output in pure English. Do NOT include markdown headers (#, ##).
+5. Output Final Answer: only after at least 3 tool calls.
 
-【⚠️ 格式警告 - 必须遵守】
-- ❌ 不要写任何标题（#、##、###、####都不行）
-- ❌ 不要写"{section_title}"作为开头
-- ✅ 章节标题由系统自动添加
-- ✅ 直接写正文，用**粗体**代替小节标题
-
-请开始：
-1. 首先思考（Thought）这个章节需要什么信息
-2. 然后调用工具（Action）获取模拟数据
-3. 收集足够信息后输出 Final Answer（纯正文，无任何标题）"""
-
-# ── ReACT 循环内消息模板 ──
+Begin with your Thought, then issue your first <tool_call>.
+"""
 
 REACT_OBSERVATION_TEMPLATE = """\
-Observation（检索结果）:
+Observation (Simulation Data Retrieved):
 
-═══ 工具 {tool_name} 返回 ═══
+=== Tool {tool_name} Result ===
 {result}
 
 ═══════════════════════════════════════════════════════════════
-已调用工具 {tool_calls_count}/{max_tool_calls} 次（已用: {used_tools_str}）{unused_hint}
-- 如果信息充分：以 "Final Answer:" 开头输出章节内容（必须引用上述原文）
-- 如果需要更多信息：调用一个工具继续检索
-═══════════════════════════════════════════════════════════════"""
+Tool calls used: {tool_calls_count}/{max_tool_calls} (Tools used: {used_tools_str}){unused_hint}
+- If you have sufficient data: output starting with "Final Answer:" in English.
+- If more evidence is needed: issue another <tool_call>.
+═══════════════════════════════════════════════════════════════
+"""
 
 REACT_INSUFFICIENT_TOOLS_MSG = (
-    "【注意】你只调用了{tool_calls_count}次工具，至少需要{min_tool_calls}次。"
-    "请再调用工具获取更多模拟数据，然后再输出 Final Answer。{unused_hint}"
+    "Note: You have made {tool_calls_count} tool calls; at least {min_tool_calls} are required. "
+    "Please make another tool call to retrieve empirical simulation data before finalizing.{unused_hint}"
 )
 
 REACT_INSUFFICIENT_TOOLS_MSG_ALT = (
-    "当前只调用了 {tool_calls_count} 次工具，至少需要 {min_tool_calls} 次。"
-    "请调用工具获取模拟数据。{unused_hint}"
+    "Currently {tool_calls_count} tool calls made; at least {min_tool_calls} required. "
+    "Please issue a tool call to query simulation records.{unused_hint}"
 )
 
 REACT_TOOL_LIMIT_MSG = (
-    "工具调用次数已达上限（{tool_calls_count}/{max_tool_calls}），不能再调用工具。"
-    '请立即基于已获取的信息，以 "Final Answer:" 开头输出章节内容。'
+    "Tool call limit reached ({tool_calls_count}/{max_tool_calls}). "
+    'Synthesize your findings and output starting with "Final Answer:" in English.'
 )
 
-REACT_UNUSED_TOOLS_HINT = "\n💡 你还没有使用过: {unused_list}，建议尝试不同工具获取多角度信息"
+REACT_UNUSED_TOOLS_HINT = "\nTip: You have not tried {unused_list}. Consider querying them for distinct stakeholder angles."
 
-REACT_FORCE_FINAL_MSG = "已达到工具调用限制，请直接输出 Final Answer: 并生成章节内容。"
-
-# ── Chat prompt ──
+REACT_FORCE_FINAL_MSG = "Tool limit reached. Please output Final Answer: with the complete section narrative."
 
 CHAT_SYSTEM_PROMPT_TEMPLATE = """\
-你是一个简洁高效的模拟预测助手。
+You are an intelligent simulation report interrogation analyst.
 
-【背景】
-预测条件: {simulation_requirement}
+[Simulation Requirement Shock]
+{simulation_requirement}
 
-【已生成的分析报告】
+[Generated Simulation Report]
 {report_content}
 
-【规则】
-1. 优先基于上述报告内容回答问题
-2. 直接回答问题，避免冗长的思考论述
-3. 仅在报告内容不足以回答时，才调用工具检索更多数据
-4. 回答要简洁、清晰、有条理
+[Guidelines]
+1. Answer questions concisely and factually based on the report and simulation findings.
+2. Provide direct, structured answers in English.
+3. Only call tools if the report lacks the specific detail requested.
+4. Use > blockquotes for direct quotes or metrics.
 
-【可用工具】（仅在需要时使用，最多调用1-2次）
+[Available Tools]
 {tools_description}
-
-【工具调用格式】
-<tool_call>
-{{"name": "工具名称", "parameters": {{"参数名": "参数值"}}}}
-</tool_call>
-
-【回答风格】
-- 简洁直接，不要长篇大论
-- 使用 > 格式引用关键内容
-- 优先给出结论，再解释原因"""
-
-CHAT_OBSERVATION_SUFFIX = "\n\n请简洁回答问题。"
-
-
-# ═══════════════════════════════════════════════════════════════
-# ReportAgent 主类
-# ═══════════════════════════════════════════════════════════════
+"""
 
 
 class ReportAgent:

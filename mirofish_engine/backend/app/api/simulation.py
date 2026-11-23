@@ -623,7 +623,7 @@ def prepare_simulation():
                 if result_state.status == SimulationStatus.FAILED:
                     task_manager.fail_task(
                         task_id,
-                        result_state.error or "模拟准备失败"
+                        result_state.error or "Simulation preparation failed"
                     )
                 else:
                     task_manager.complete_task(
@@ -2763,7 +2763,7 @@ def get_env_status():
                 "env_alive": true,
                 "twitter_available": true,
                 "reddit_available": true,
-                "message": "环境正在运行，可以接收Interview命令"
+                "message": "Environment is running and ready for interviews"
             }
         }
     """
@@ -2828,7 +2828,7 @@ def close_simulation_env():
         {
             "success": true,
             "data": {
-                "message": "环境关闭命令已发送",
+                "message": "Environment shutdown command dispatched",
                 "result": {...},
                 "timestamp": "2025-12-08T10:00:01"
             }
