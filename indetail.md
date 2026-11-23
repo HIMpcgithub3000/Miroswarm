@@ -23,8 +23,8 @@
 7. [Production Deployment, PM2 & Nginx Architecture](#7-production-deployment-pm2--nginx-architecture)
 8. [API Contracts & Database Schemas](#8-api-contracts--database-schemas)
 9. [Seed PRD Document Specification: Input Guidelines & Domain Rules](#9-seed-prd-document-specification-input-guidelines--domain-rules)
-   - [9.1 What MUST Be Included (क्या होना चाहिए)](#91-what-must-be-included-क्या-होना-चाहिए)
-   - [9.2 What MUST NOT Be Included (क्या नहीं होना चाहिए)](#92-what-must-not-be-included-क्या-नहीं-होना-चाहिए)
+   - [9.1 What MUST Be Included](#91-what-must-be-included)
+   - [9.2 What MUST NOT Be Included](#92-what-must-not-be-included)
    - [9.3 Mathematical Rationale for Multi-Agent Swarms](#93-mathematical-rationale-for-multi-agent-swarms)
    - [9.4 Canonical PRD Markdown Template (.md)](#94-canonical-prd-markdown-template-md)
 
@@ -452,40 +452,40 @@ flowchart LR
     GATE -- No --> REFINE
 ```
 
-### 9.1 What MUST Be Included (क्या होना चाहिए)
+### 9.1 What MUST Be Included
 
-1. **Multi-Party Opposing Stakeholders (बहुपक्षीय विरोधी हितधारक)**:
+1. **Multi-Party Opposing Stakeholders**:
    - Must define at least 3 to 4 distinct ecosystem actors with competing financial and operational utility functions (e.g. *Hospital CFOs*, *Patient Consumers*, *Insurance TPAs*, *NPPA/MOHFW Regulators*).
    - If all parties share identical objectives, no adversarial tension exists, making multi-agent debate mathematically trivial.
-2. **Quantifiable Policies, Numeric Caps & Constraints (सटीक दरें और संख्यात्मक सीमाएं)**:
+2. **Quantifiable Policies, Numeric Caps & Constraints**:
    - Must state concrete figures, tariffs, percentages, or statutory deadlines (e.g., `₹4,000/day max room rent`, `15% trade margin on medical devices`, `30-day claims turnaround SLA`).
    - Numerical bounds are strictly required for the causal DAG $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ to compute quantitative deltas.
-3. **Causal Retaliation Levers & Loophole Surfaces (टकराव और प्रतिरोध के रास्ते)**:
+3. **Causal Retaliation Levers & Loophole Surfaces**:
    - Must specify how constrained parties will react to margin compression (e.g., *“If room rent is capped at ₹4,000, hospitals will unbundle OT surgical consumables and inflate pack charges by +42%”*).
    - This provides the ground truth for directional edges like `INFLATES`, `RETALIATES_AGAINST`, and `DISPUTES`.
-4. **Designated Target Audience for the 80% Decision Gate (लक्ष्य वर्ग)**:
+4. **Designated Target Audience for the 80% Decision Gate**:
    - Must explicitly designate the primary beneficiary group whose approval score is benchmarked against the **80% threshold** in Step 4.
    - If Simulated Positive Sentiment $> 80\%$, the system unlocks automated code generation (**MAKE PRODUCT**); if $\le 80\%$, it triggers local LLM re-negotiation (**REFINE INITIAL PLAN**).
-5. **Structured Markdown Hierarchy & Optimal Length (सुव्यवस्थित संरचना)**:
+5. **Structured Markdown Hierarchy & Optimal Length**:
    - Use clean Markdown syntax (`#`, `##`, `###`, tables, bullet lists).
    - Optimal length: **1,000 to 3,000 words (2 to 5 pages)**. This fits comfortably inside local CPU Ollama context without exceeding token processing limits.
 
 ---
 
-### 9.2 What MUST NOT Be Included (क्या नहीं होना चाहिए)
+### 9.2 What MUST NOT Be Included
 
-1. **Empty Marketing Fluff & Vague Buzzwords (खोखले प्रचारक शब्द)**:
+1. **Empty Marketing Fluff & Vague Buzzwords**:
    - Avoid generic buzzwords (e.g., *"revolutionary AI synergy"*, *"world-class disruptive platform"*, *"empowering win-win ecosystem"*).
    - Fluff lacks causal mechanics; agents cannot parse or debate non-operational adjectives.
-2. **Giant Unstructured Dumps & Raw Logs (विशालकाय अनस्ट्रक्चर्ड डेटा या कोड)**:
+2. **Giant Unstructured Dumps & Raw Logs**:
    - Do NOT paste 50+ pages of raw server logs, unformatted CSV dumps, or full code repositories.
    - Local Ollama CPU execution has finite token processing speeds. Unstructured noise will cause frontend request timeouts (`timeout of 300000ms exceeded`).
-3. **Zero-Friction / Naive Harmony Assumptions (बिना विरोध की काल्पनिक स्थिति)**:
+3. **Zero-Friction / Naive Harmony Assumptions**:
    - Do NOT assume all participants will happily comply with new rules without friction or resistance.
    - Without friction, the simulation yields an artificial 100% positive score, blinding founders to lethal regulatory or market blowbacks.
-4. **Subjective & Undefined Concepts (अस्पष्ट परिभाषाएं)**:
+4. **Subjective & Undefined Concepts**:
    - Avoid undefined terms like *"fair prices"*, *"reasonable margins"*, or *"good quality"* without specifying the exact formula or statutory reference.
-5. **Confidential Credentials or Sensitive PII (गोपनीय पासवर्ड या व्यक्तिगत डेटा)**:
+5. **Confidential Credentials or Sensitive PII**:
    - Never include production database passwords, private API tokens, or actual personal patient/customer identities.
 
 ---

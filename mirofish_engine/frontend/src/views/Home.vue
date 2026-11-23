@@ -182,11 +182,11 @@
                 <div class="guide-header" @click="toggleGuide">
                   <div class="guide-header-title">
                     <span class="guide-icon">📋</span>
-                    <span class="guide-main-text">PRD Document Guidelines (क्या होना चाहिए vs क्या नहीं होना चाहिए)</span>
+                    <span class="guide-main-text">PRD Document Guidelines: What to Include vs What to Avoid</span>
                     <span class="guide-badge">Input Spec</span>
                   </div>
                   <button type="button" class="guide-toggle-btn">
-                    {{ showGuide ? 'Hide Guide ▲' : 'Show Guide (नियम व दिशानिर्देश) ▼' }}
+                    {{ showGuide ? 'Hide Guide ▲' : 'Show Guide & Quality Rules ▼' }}
                   </button>
                 </div>
 
@@ -200,7 +200,7 @@
                       @click="activeGuideTab = 'include'"
                     >
                       <span class="tab-indicator green"></span>
-                      <span>🟢 What to Include (क्या होना चाहिए)</span>
+                      <span>🟢 What to Include</span>
                     </button>
                     <button 
                       type="button" 
@@ -209,7 +209,7 @@
                       @click="activeGuideTab = 'avoid'"
                     >
                       <span class="tab-indicator red"></span>
-                      <span>🔴 What to Avoid (क्या नहीं होना चाहिए)</span>
+                      <span>🔴 What to Avoid</span>
                     </button>
                     <button 
                       type="button" 
@@ -228,7 +228,7 @@
                       <div class="guide-rule-item">
                         <div class="rule-num">01</div>
                         <div class="rule-content">
-                          <div class="rule-title">Multi-Party Opposing Stakeholders (बहुपक्षीय विरोधी हितधारक)</div>
+                          <div class="rule-title">Multi-Party Opposing Stakeholders</div>
                           <div class="rule-desc">
                             Define at least 3-4 distinct stakeholder groups with naturally conflicting economic incentives (e.g. Hospital CFOs, Patient Consumers, Insurance TPAs, Government Regulators). AI swarms require conflicting motives to simulate authentic pushback and debates.
                           </div>
@@ -238,7 +238,7 @@
                       <div class="guide-rule-item">
                         <div class="rule-num">02</div>
                         <div class="rule-content">
-                          <div class="rule-title">Quantifiable Policies & Numeric Caps (सटीक दरें और संख्यात्मक सीमाएं)</div>
+                          <div class="rule-title">Quantifiable Policies & Numeric Caps</div>
                           <div class="rule-desc">
                             Provide explicit numbers, percentages, or statutory caps (e.g. <code>₹4,000/day room tariff cap</code>, <code>15% maximum trade margin</code>, <code>30-day settlement SLA</code>). Quantitative boundaries allow the graph to evaluate mathematically.
                           </div>
@@ -248,7 +248,7 @@
                       <div class="guide-rule-item">
                         <div class="rule-num">03</div>
                         <div class="rule-content">
-                          <div class="rule-title">Causal Retaliation Levers (टकराव और प्रतिरोध के रास्ते)</div>
+                          <div class="rule-title">Causal Retaliation Levers & Loopholes</div>
                           <div class="rule-desc">
                             Specify what actions squeezed parties will take to circumvent constraints (e.g. <em>"If room rents are capped, private hospitals will inflate unregulated OT and consumable charges by +42%"</em>). This fuels GraphRAG causal relationships.
                           </div>
@@ -258,7 +258,7 @@
                       <div class="guide-rule-item">
                         <div class="rule-num">04</div>
                         <div class="rule-content">
-                          <div class="rule-title">Designated Target Audience (लक्ष्य वर्ग for &gt;80% Gate)</div>
+                          <div class="rule-title">Designated Target Audience (For &gt;80% Gate)</div>
                           <div class="rule-desc">
                             Explicitly identify the primary target group whose satisfaction dictates the decision gate. If this group's simulated sentiment exceeds 80%, the system unlocks <strong>MAKE PRODUCT</strong>; otherwise, it requires <strong>REFINE</strong>.
                           </div>
@@ -268,7 +268,7 @@
                       <div class="guide-rule-item">
                         <div class="rule-num">05</div>
                         <div class="rule-content">
-                          <div class="rule-title">Structured Markdown Format (सुव्यवस्थित मार्कडाउन संरचना)</div>
+                          <div class="rule-title">Structured Markdown Format & Hierarchy</div>
                           <div class="rule-desc">
                             Use standard markdown headings (<code>#</code>, <code>##</code>), bullet points, and concise sections. Keep total length optimal (1,000 to 3,000 words / 2–5 pages) for ultra-fast local Ollama CPU inference.
                           </div>
@@ -283,7 +283,7 @@
                       <div class="guide-rule-item avoid">
                         <div class="rule-num red">01</div>
                         <div class="rule-content">
-                          <div class="rule-title">Empty Marketing Buzzwords (खोखले प्रचारक शब्द)</div>
+                          <div class="rule-title">Empty Marketing Buzzwords & Fluff</div>
                           <div class="rule-desc">
                             Avoid vague slogans like <em>"revolutionary AI paradigm shift"</em> or <em>"seamless ecosystem synergy"</em> without operational mechanisms. Without rules, agents cannot debate or vote meaningfully.
                           </div>
@@ -293,7 +293,7 @@
                       <div class="guide-rule-item avoid">
                         <div class="rule-num red">02</div>
                         <div class="rule-content">
-                          <div class="rule-title">Giant Unstructured Dumps & Raw Logs (विशालकाय अनस्ट्रक्चर्ड डेटा या कोड)</div>
+                          <div class="rule-title">Giant Unstructured Dumps & Raw Logs</div>
                           <div class="rule-desc">
                             Do not paste 50+ pages of unformatted logs, raw CSVs, or entire code repositories. Local Ollama LLM has finite context limits and processing raw blobs will cause token timeouts (>300s).
                           </div>
@@ -303,7 +303,7 @@
                       <div class="guide-rule-item avoid">
                         <div class="rule-num red">03</div>
                         <div class="rule-content">
-                          <div class="rule-title">Zero-Friction / Naive Harmony Assumptions (बिना विरोध की काल्पनिक स्थिति)</div>
+                          <div class="rule-title">Zero-Friction / Naive Harmony Assumptions</div>
                           <div class="rule-desc">
                             Never assume all actors will comply voluntarily without friction. If there is no incentive to resist, the simulation produces a superficial 100% positive result, masking real-world systemic risks.
                           </div>
@@ -313,7 +313,7 @@
                       <div class="guide-rule-item avoid">
                         <div class="rule-num red">04</div>
                         <div class="rule-content">
-                          <div class="rule-title">Subjective & Undefined Terms (अस्पष्ट परिभाषाएं)</div>
+                          <div class="rule-title">Subjective & Undefined Jargon</div>
                           <div class="rule-desc">
                             Avoid subjective phrases like <em>"fair and reasonable pricing"</em> or <em>"optimal user experience"</em> without defining baseline benchmark formulas or standard deviation limits.
                           </div>
@@ -323,7 +323,7 @@
                       <div class="guide-rule-item avoid">
                         <div class="rule-num red">05</div>
                         <div class="rule-content">
-                          <div class="rule-title">Confidential Secrets & Sensitive PII (गोपनीय पासवर्ड या व्यक्तिगत डेटा)</div>
+                          <div class="rule-title">Confidential Secrets & Sensitive PII</div>
                           <div class="rule-desc">
                             Do not include production credentials, secret API tokens, or personally identifiable customer records in the input seed document.
                           </div>
